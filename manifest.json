@@ -1,7 +1,7 @@
 {
   "name": "祁韵喵喵机",
   "short_name": "祁韵喵喵机",
-  "start_url": "/",
+  "start_url": "/qiyun/",
   "display": "standalone",
   "background_color": "#fcebf3",
   "theme_color": "#fcebf3",
