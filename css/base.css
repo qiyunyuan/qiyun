@@ -84,7 +84,7 @@ body {
     position: absolute;
     left: 15px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-55%);
     width: 40px;
     height: 40px;
     display: flex;
@@ -94,7 +94,6 @@ body {
     font-size: 25px;
     background: none;
     border: none;
-line-height: 1;
     /* 如果需要可以加个点击效果或图标样式 */
 }
 
