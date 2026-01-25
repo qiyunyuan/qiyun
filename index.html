@@ -43,27 +43,27 @@
             <div class="apps-grid">
                 <div class="app-item">
                     <div class="app-icon"></div>
-                    <div class="app-name">APP</div>
+                    <div class="app-name">世界观</div>
                 </div>
                 <div class="app-item">
                     <div class="app-icon"></div>
-                    <div class="app-name">APP</div>
+                    <div class="app-name">面具</div>
                 </div>
                 <div class="app-item">
                     <div class="app-icon"></div>
-                    <div class="app-name">APP</div>
+                    <div class="app-name">世界书</div>
                 </div>
                 <div class="app-item">
                     <div class="app-icon"></div>
-                    <div class="app-name">APP</div>
+                    <div class="app-name">正则</div>
                 </div>
                 <div class="app-item" id="btn-settings">
                     <div class="app-icon"></div>
                     <div class="app-name">设置</div>
                 </div>
-                <div class="app-item">
+                <div class="app-item" id="btn-open-preset">
                     <div class="app-icon"></div>
-                    <div class="app-name">APP</div>
+                    <div class="app-name">预设</div>
                 </div>
             </div>
         </div>
@@ -366,6 +366,84 @@
                     <div class="no-config">暂无配置</div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- 新增：预设页面 -->
+    <div id="page-preset-settings" class="page">
+        <!-- 顶部标题栏 -->
+        <div class="app-header">
+            <div id="btn-back-preset" class="back-btn">‹</div>
+            <div class="title">预设</div>
+        </div>
+        <!-- 内容区域 -->
+        <div class="app-content preset-container">
+            
+            <!-- 1. 预设管理卡片 -->
+            <div class="preset-card">
+                <div class="preset-header-row">
+                    <span>默认对话补全</span>
+                    <span class="preset-arrow">›</span>
+                </div>
+                <div class="preset-actions-row">
+                    <button class="preset-btn">重命名</button>
+                    <button class="preset-btn">保存</button>
+                    <button class="preset-btn">另存</button>
+                    <button class="preset-btn delete">删除</button>
+                </div>
+            </div>
+
+            <!-- 2. 参数设置卡片 -->
+            <div class="preset-card">
+                <!-- 上下文长度 -->
+                <div class="param-item">
+                    <div class="param-header">
+                        <label class="param-label">上下文长度</label>
+                        <span class="param-unit">tokens</span>
+                    </div>
+                    <div class="param-control">
+                        <input type="range" class="slider" min="0" max="2000000" value="30000" step="10000">
+                        <input type="number" class="number-input" value="30000">
+                    </div>
+                </div>
+                
+                <hr class="dashed-line" style="margin: 15px 0; border:none; border-top:1px dashed #eee;">
+
+                <!-- 最大回复长度 -->
+                <div class="param-item">
+                    <div class="param-header">
+                        <label class="param-label">最大回复长度</label>
+                        <span class="param-unit">tokens</span>
+                    </div>
+                    <div class="param-control">
+                        <input type="range" class="slider" min="0" max="128000" value="64000" step="1000">
+                        <input type="number" class="number-input" value="64000">
+                    </div>
+                </div>
+
+                <hr class="dashed-line" style="margin: 15px 0; border:none; border-top:1px dashed #eee;">
+
+                <!-- 温度 -->
+                <div class="param-item">
+                    <div class="param-header">
+                        <label class="param-label">温度</label>
+                        <span class="param-unit">Temperature</span>
+                    </div>
+                    <div class="param-control">
+                        <input type="range" class="slider" min="0" max="2" value="0.7" step="0.1">
+                        <input type="number" class="number-input" value="0.7">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 提示词卡片 -->
+            <div class="preset-card">
+                <div class="prompt-header">
+                    <label class="param-label">提示词</label>
+                    <button class="btn-new-prompt">新建</button>
+                </div>
+            </div>
+
         </div>
     </div>
 

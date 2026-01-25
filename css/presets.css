@@ -1,0 +1,169 @@
+/* 预设页面容器 */
+.preset-container {
+    padding: 20px;
+    background-color: var(--white); /* 背景改为纯白 */
+    height: 100%; /* 撑满高度 */
+}
+
+/* 移除原来的卡片样式，改为普通的分块容器 */
+.preset-card {
+    background-color: transparent; /* 透明背景 */
+    border-radius: 0; /* 去掉圆角 */
+    padding: 10px 0; /* 上下给点间距 */
+    margin-bottom: 20px; /* 块与块之间的间距 */
+    box-shadow: none; /* 去掉阴影 */
+    border-bottom: 1px solid #f5f5f5; /* 加一条淡淡的分割线 */
+}
+
+/* 最后一个块不需要分割线 */
+.preset-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* --- 第一部分：预设管理 --- */
+.preset-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 16px; /* 稍微加大一点标题 */
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    padding: 10px 0; /* 增加点击区域 */
+}
+
+.preset-arrow {
+    color: #ccc;
+    font-size: 20px;
+}
+
+.preset-actions-row {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.preset-btn {
+    flex: 1;
+    padding: 8px 0;
+    border: 1px solid #eee;
+    background-color: #fff; /* 按钮保持白色背景 */
+    border-radius: 8px; /* 按钮圆角稍微小一点 */
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 给按钮加一点点微弱的阴影，更有质感 */
+}
+
+.preset-btn:active {
+    background-color: #f9f9f9;
+    transform: translateY(1px);
+}
+
+.preset-btn.delete {
+    color: #ff6b81;
+    border-color: #ffeef1;
+    background-color: #fff5f7;
+}
+
+/* --- 第二部分：参数滑块 --- */
+.param-item {
+    margin-bottom: 25px; /* 增加参数项之间的间距 */
+}
+
+.param-item:last-child {
+    margin-bottom: 10px;
+}
+
+.param-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.param-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.param-unit {
+    font-size: 12px;
+    color: #999;
+}
+
+.param-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 滑块样式定制 */
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px; /* 滑块轨道变细一点，更精致 */
+    background: #f0f0f0;
+    border-radius: 2px;
+    outline: none;
+    flex: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px; /* 滑块头稍微大一点 */
+    height: 20px;
+    background: #fff; 
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #e0e0e0; /* 灰色边框 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 柔和的阴影 */
+}
+
+/* 输入框样式 */
+.number-input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    outline: none;
+    background-color: #f9f9f9; /* 输入框稍微带点灰底 */
+}
+
+.number-input:focus {
+    border-color: #4a90e2;
+    background-color: #fff;
+}
+
+/* --- 第三部分：提示词 --- */
+.prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.btn-new-prompt {
+    padding: 6px 16px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 20px; /* 胶囊形状 */
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-new-prompt:hover {
+    background-color: #e0e0e0;
+}

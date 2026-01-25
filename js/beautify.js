@@ -11,12 +11,12 @@ const DEFAULT_CONFIG = {
     wallpaper: '', // 背景壁纸
     sliders: ['', '', ''], // 3张轮播图
     apps: [ // 6个APP图标和名称
-        { name: 'APP', icon: '' },
-        { name: 'APP', icon: '' },
-        { name: 'APP', icon: '' },
-        { name: 'APP', icon: '' },
+        { name: '世界观', icon: '' },
+        { name: '面具', icon: '' },
+        { name: '世界书', icon: '' },
+        { name: '正则', icon: '' },
         { name: '设置', icon: '' },
-        { name: 'APP', icon: '' }
+        { name: '预设', icon: '' }
     ]
 };
 
