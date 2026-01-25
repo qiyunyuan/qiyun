@@ -1,6 +1,5 @@
-/* 变量 */
 @import "./variables.css";
-
+@import "./beautify.css";
 
 /* 基础样式 */
 @import "./base.css";
@@ -10,5 +9,3 @@
 @import "./components.css";
 @import "./settings.css";
 @import "./api.css";
-
-

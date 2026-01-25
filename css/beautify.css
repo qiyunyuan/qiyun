@@ -1,0 +1,240 @@
+/* 美化设置页面样式 */
+
+#page-beautify-settings {
+    background-color: #fcebf3;
+}
+
+/* 容器布局 */
+.beautify-container {
+    padding: 15px;
+    padding-bottom: 80px;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+}
+
+/* 分组标题 */
+.beautify-group-title {
+    font-size: 14px;
+    color: #666;
+    margin: 15px 0 10px 5px;
+    font-weight: bold;
+}
+
+.beautify-group-title:first-child {
+    margin-top: 0;
+}
+
+/* 设置卡片 */
+.beautify-card {
+    background-color: var(--white);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+/* 对齐辅助 */
+.center-align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-item {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-label {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+    display: block;
+}
+
+/* 图片预览区域 */
+.image-preview-wrapper {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.image-preview {
+    background-color: #f5f5f5;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #eee;
+}
+
+.large-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* 头像圆形 */
+}
+
+.rect-preview {
+    width: 100%;
+    height: 140px;
+    border-radius: 12px;
+}
+
+.app-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+}
+
+/* 按钮行 */
+.action-buttons-row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.link-btn {
+    background-color: #fff;
+    border: 1px solid #eee;
+    color: #666;
+}
+
+.file-btn {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid transparent;
+}
+
+.action-btn:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+}
+
+/* 链接输入框容器 (默认隐藏) */
+.url-input-container {
+    width: 100%;
+    margin-top: 10px;
+    display: none; /* 默认隐藏 */
+}
+
+.url-input-container.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    background-color: #fff;
+    border-color: #ffd9e8;
+}
+
+/* 隐藏的文件输入 */
+.hidden-file-input {
+    display: none;
+}
+
+/* 虚线分割 */
+.dashed-line {
+    border: 0;
+    border-top: 1px dashed #eee;
+    margin: 20px 0;
+}
+
+/* APP图标设置网格 */
+.app-icons-settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 双列 */
+    gap: 15px;
+    padding: 15px;
+    background-color: transparent; /* 网格本身透明 */
+    box-shadow: none; /* 去掉大卡片阴影，改用内部小卡片 */
+}
+
+.app-setting-card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.app-name-input {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 12px;
+}
+
+.small-btns .action-btn {
+    padding: 6px 0;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+.small-btns {
+    gap: 8px;
+}
+
+/* 保存按钮 */
+.save-action-area {
+    margin-top: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.btn-save-beautify {
+    background: linear-gradient(135deg, #ff9ebf, #ff8eb3);
+    color: white;
+    border: none;
+    padding: 14px 60px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(255, 142, 179, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s;
+    width: 80%;
+}
+
+.btn-save-beautify:active {
+    transform: scale(0.96);
+}
+
+.btn-reset {
+    margin-top: 15px;
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 13px;
+    cursor: pointer;
+}

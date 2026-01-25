@@ -1,9 +1,13 @@
 import { switchPage } from './router.js';
 import { initApiSettings } from './api.js';
+import { initBeautify } from './beautify.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化 API 模块
     initApiSettings();
+
+    // 初始化美化设置模块 (应用已保存的主题)
+    initBeautify();
 
     // 监听“设置”按钮点击
     const btnSettings = document.getElementById('btn-settings');
@@ -33,6 +37,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnBackSettings = document.getElementById('btn-back-settings');
     if (btnBackSettings) {
         btnBackSettings.addEventListener('click', () => {
+            switchPage('page-settings');
+        });
+    }
+
+    // 监听“美化设置”按钮点击
+    const btnOpenBeautify = document.getElementById('btn-open-beautify');
+    if (btnOpenBeautify) {
+        btnOpenBeautify.addEventListener('click', () => {
+            switchPage('page-beautify-settings');
+        });
+    }
+
+    // 监听“美化设置”页面的返回按钮
+    const btnBackBeautify = document.getElementById('btn-back-beautify');
+    if (btnBackBeautify) {
+        btnBackBeautify.addEventListener('click', () => {
             switchPage('page-settings');
         });
     }

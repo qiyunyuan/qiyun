@@ -87,7 +87,7 @@
                     <div class="settings-item-text">主题设置</div>
                     <div class="settings-arrow">›</div>
                 </div>
-                <div class="settings-item">
+                <div class="settings-item" id="btn-open-beautify">
                     <div class="settings-item-text">美化设置</div>
                     <div class="settings-arrow">›</div>
                 </div>
@@ -96,6 +96,208 @@
                     <div class="settings-arrow">›</div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- 美化设置页面 -->
+    <div id="page-beautify-settings" class="page">
+        <!-- 顶部标题栏 -->
+        <div class="app-header">
+            <div id="btn-back-beautify" class="back-btn">‹</div>
+            <div class="title">美化设置</div>
+        </div>
+        <!-- 内容区域 -->
+        <div class="app-content beautify-container">
+            
+            <!-- 1. 个人资料设置 -->
+            <div class="beautify-group-title">个人资料</div>
+            <div class="beautify-card">
+                <div class="form-item center-align">
+                    <div class="image-preview-wrapper">
+                        <div class="image-preview large-preview" id="preview-avatar"></div>
+                    </div>
+                    <div class="action-buttons-row">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-avatar">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-avatar">相册</div>
+                    </div>
+                    <!-- 隐藏的输入控件 -->
+                    <div class="url-input-container" id="container-url-avatar">
+                        <input type="text" class="form-input" id="url-avatar" placeholder="粘贴图片链接...">
+                    </div>
+                    <input type="file" id="file-avatar" class="hidden-file-input" accept="image/*">
+                </div>
+
+                <div class="form-item">
+                    <label class="form-label">昵称</label>
+                    <input type="text" id="input-nickname" class="form-input" placeholder="输入昵称">
+                </div>
+                <div class="form-item">
+                    <label class="form-label">个性签名</label>
+                    <input type="text" id="input-bio" class="form-input" placeholder="输入一句话简介">
+                </div>
+            </div>
+
+            <!-- 2. 界面外观设置 -->
+            <div class="beautify-group-title">界面外观</div>
+            <div class="beautify-card">
+                <div class="form-item center-align">
+                    <label class="form-label" style="align-self: flex-start;">背景壁纸</label>
+                    <div class="image-preview-wrapper">
+                        <div class="image-preview rect-preview" id="preview-wallpaper"></div>
+                    </div>
+                    <div class="action-buttons-row">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-wallpaper">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-wallpaper">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-wallpaper">
+                        <input type="text" class="form-input" id="url-wallpaper" placeholder="粘贴壁纸链接...">
+                    </div>
+                    <input type="file" id="file-wallpaper" class="hidden-file-input" accept="image/*">
+                </div>
+            </div>
+
+            <!-- 3. 滑动图片设置 -->
+            <div class="beautify-group-title">滑动图片 (3张)</div>
+            <div class="beautify-card">
+                <!-- 图1 -->
+                <div class="slider-setting-item">
+                    <label class="form-label">图片 1</label>
+                    <div class="image-preview-wrapper">
+                        <div class="image-preview rect-preview" id="preview-slider-0"></div>
+                    </div>
+                    <div class="action-buttons-row">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-slider-0">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-slider-0">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-slider-0">
+                        <input type="text" class="form-input" id="url-slider-0" placeholder="粘贴图片链接...">
+                    </div>
+                    <input type="file" id="file-slider-0" class="hidden-file-input" accept="image/*">
+                </div>
+                <hr class="dashed-line">
+                <!-- 图2 -->
+                <div class="slider-setting-item">
+                    <label class="form-label">图片 2</label>
+                    <div class="image-preview-wrapper">
+                        <div class="image-preview rect-preview" id="preview-slider-1"></div>
+                    </div>
+                    <div class="action-buttons-row">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-slider-1">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-slider-1">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-slider-1">
+                        <input type="text" class="form-input" id="url-slider-1" placeholder="粘贴图片链接...">
+                    </div>
+                    <input type="file" id="file-slider-1" class="hidden-file-input" accept="image/*">
+                </div>
+                <hr class="dashed-line">
+                <!-- 图3 -->
+                <div class="slider-setting-item">
+                    <label class="form-label">图片 3</label>
+                    <div class="image-preview-wrapper">
+                        <div class="image-preview rect-preview" id="preview-slider-2"></div>
+                    </div>
+                    <div class="action-buttons-row">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-slider-2">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-slider-2">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-slider-2">
+                        <input type="text" class="form-input" id="url-slider-2" placeholder="粘贴图片链接...">
+                    </div>
+                    <input type="file" id="file-slider-2" class="hidden-file-input" accept="image/*">
+                </div>
+            </div>
+
+            <!-- 4. APP图标设置 -->
+            <div class="beautify-group-title">APP 图标与名称</div>
+            <div class="beautify-card app-icons-settings-grid">
+                <!-- 循环生成6个APP设置项 -->
+                <!-- 1 -->
+                <div class="app-setting-card">
+                    <div class="image-preview app-preview" id="preview-app-0"></div>
+                    <input type="text" id="input-app-name-0" class="form-input app-name-input" placeholder="名称">
+                    <div class="action-buttons-row small-btns">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-app-0">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-app-0">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-app-0">
+                        <input type="text" class="form-input" id="url-app-0" placeholder="链接...">
+                    </div>
+                    <input type="file" id="file-app-0" class="hidden-file-input" accept="image/*">
+                </div>
+                <!-- 2 -->
+                <div class="app-setting-card">
+                    <div class="image-preview app-preview" id="preview-app-1"></div>
+                    <input type="text" id="input-app-name-1" class="form-input app-name-input" placeholder="名称">
+                    <div class="action-buttons-row small-btns">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-app-1">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-app-1">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-app-1">
+                        <input type="text" class="form-input" id="url-app-1" placeholder="链接...">
+                    </div>
+                    <input type="file" id="file-app-1" class="hidden-file-input" accept="image/*">
+                </div>
+                <!-- 3 -->
+                <div class="app-setting-card">
+                    <div class="image-preview app-preview" id="preview-app-2"></div>
+                    <input type="text" id="input-app-name-2" class="form-input app-name-input" placeholder="名称">
+                    <div class="action-buttons-row small-btns">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-app-2">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-app-2">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-app-2">
+                        <input type="text" class="form-input" id="url-app-2" placeholder="链接...">
+                    </div>
+                    <input type="file" id="file-app-2" class="hidden-file-input" accept="image/*">
+                </div>
+                <!-- 4 -->
+                <div class="app-setting-card">
+                    <div class="image-preview app-preview" id="preview-app-3"></div>
+                    <input type="text" id="input-app-name-3" class="form-input app-name-input" placeholder="名称">
+                    <div class="action-buttons-row small-btns">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-app-3">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-app-3">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-app-3">
+                        <input type="text" class="form-input" id="url-app-3" placeholder="链接...">
+                    </div>
+                    <input type="file" id="file-app-3" class="hidden-file-input" accept="image/*">
+                </div>
+                <!-- 5 -->
+                <div class="app-setting-card">
+                    <div class="image-preview app-preview" id="preview-app-4"></div>
+                    <input type="text" id="input-app-name-4" class="form-input app-name-input" placeholder="名称">
+                    <div class="action-buttons-row small-btns">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-app-4">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-app-4">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-app-4">
+                        <input type="text" class="form-input" id="url-app-4" placeholder="链接...">
+                    </div>
+                    <input type="file" id="file-app-4" class="hidden-file-input" accept="image/*">
+                </div>
+                <!-- 6 -->
+                <div class="app-setting-card">
+                    <div class="image-preview app-preview" id="preview-app-5"></div>
+                    <input type="text" id="input-app-name-5" class="form-input app-name-input" placeholder="名称">
+                    <div class="action-buttons-row small-btns">
+                        <div class="action-btn link-btn" data-type="link" data-target="url-app-5">链接</div>
+                        <div class="action-btn file-btn" data-type="file" data-target="file-app-5">相册</div>
+                    </div>
+                    <div class="url-input-container" id="container-url-app-5">
+                        <input type="text" class="form-input" id="url-app-5" placeholder="链接...">
+                    </div>
+                    <input type="file" id="file-app-5" class="hidden-file-input" accept="image/*">
+                </div>
+            </div>
+
+            <div class="save-action-area">
+                <button id="btn-save-beautify" class="btn-save-beautify">保存所有设置</button>
+                <br>
+                <button id="btn-reset-beautify" class="btn-reset">恢复默认</button>
+            </div>
+
         </div>
     </div>
 
