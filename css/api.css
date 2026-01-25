@@ -44,20 +44,45 @@
     color: rgba(0, 0, 0, 0.3);
 }
 
+/* 可点击的选择框 (替代输入框) */
+.api-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.3); /* 默认 placeholder 颜色 */
+    background-color: var(--white);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.api-select.has-value {
+    color: var(--black);
+}
+
+.api-select:active {
+    background-color: #f9f9f9;
+}
+
 /* 模型选择行 (Flex布局) */
 .model-row {
     display: flex;
     gap: 10px;
 }
 
-.model-row .api-input {
+.model-row .api-select {
     flex: 1;
 }
 
 /* 拉取模型按钮 */
 .btn-fetch {
     padding: 0 15px;
-    height: 44px; /* 与输入框高度一致 (14px font + 12px*2 padding + 2px border approx) */
+    height: 44px; /* 与输入框高度一致 */
     background-color: var(--white);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -147,9 +172,10 @@
     padding: 0 20px 20px 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px; /* 增加间距 */
 }
 
+/* 配置保存行 */
 .config-row {
     display: flex;
     gap: 10px;
@@ -163,4 +189,287 @@
     border-radius: 12px;
     font-size: 14px;
     cursor: pointer;
+    flex-shrink: 0;
+}
+
+.btn-save-config:active {
+    opacity: 0.9;
+}
+
+/* 已保存配置的标题行 */
+.saved-configs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.saved-title {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.btn-clear-all {
+    font-size: 12px;
+    color: #ff8cb8;
+    cursor: pointer;
+}
+
+/* 配置列表容器 */
+.config-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* max-height: 300px;  如果列表太长可以取消注释开启滚动 */
+    /* overflow-y: auto; */
+}
+
+.no-config {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 13px;
+    padding: 20px 0;
+}
+
+/* 配置卡片项 */
+.config-item {
+    background-color: var(--white);
+    border: 1px solid #ffe4ef; /* 浅粉色边框 */
+    border-radius: 12px;
+    padding: 12px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.config-item:active {
+    background-color: #fffbfc;
+}
+
+/* 配置头部：名称 + 状态 + 删除 */
+.config-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 增加一点间距 */
+    width: 100%; /* 确保占满宽度 */
+}
+
+.config-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+/* 状态徽章 */
+.config-status-tag {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+/* 有额度：浅绿底绿字 */
+.config-status-tag.status-ok {
+    background-color: #e8f5e9;
+    color: #4caf50;
+}
+
+/* 无额度：浅红底红字 */
+.config-status-tag.status-no {
+    background-color: #ffebee;
+    color: #ef5350;
+}
+
+/* 删除按钮 */
+.btn-delete-config {
+    margin-left: auto; /* 推到最右侧 */
+    font-size: 12px;
+    color: #ff8cb8;
+    cursor: pointer;
+    padding: 4px;
+}
+
+/* 配置详情文字 */
+.config-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 2px;
+}
+
+.config-detail-line {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.4);
+    line-height: 1.4;
+    
+    /* 文本超长省略 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =================================
+   模态弹窗样式
+   ================================= */
+
+/* 遮罩层 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(252, 235, 243, 0.8); /* 半透明粉色遮罩 */
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* 弹窗卡片 */
+.modal-card {
+    width: 300px;
+    height: 500px;
+    background-color: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal-card {
+    transform: scale(1);
+}
+
+/* 弹窗头部 */
+.modal-header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--black);
+}
+
+/* 关闭按钮 */
+.modal-close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--black);
+    cursor: pointer;
+    line-height: 1;
+    font-family: sans-serif;
+    padding: 5px;
+}
+
+/* 弹窗内容 */
+.modal-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow: hidden; /* 防止内容溢出 */
+}
+
+/* 选项卡切换 */
+.modal-tabs {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: var(--white);
+    color: var(--black);
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background-color: #eebcd2;
+    color: var(--white);
+    border-color: #eebcd2;
+}
+
+/* 模型列表区域 */
+.model-list {
+    flex: 1;
+    overflow-y: auto; /* 允许垂直滚动 */
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 列表项之间无间隙，或根据需要设置 */
+}
+
+/* 自定义滚动条 */
+.model-list::-webkit-scrollbar {
+    width: 4px;
+}
+.model-list::-webkit-scrollbar-thumb {
+    background-color: #e0e0e0;
+    border-radius: 2px;
+}
+
+/* 模型列表项 */
+.model-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 5px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 14px;
+    color: var(--black);
+    gap: 10px;
+}
+
+/* 星星图标 */
+.star-icon {
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    user-select: none;
+}
+
+/* 收藏状态 - 黄色 */
+.star-icon.fav {
+    color: #ffd700; /* 金黄色 */
+}
+
+/* 模型名称 */
+.model-name {
+    flex: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

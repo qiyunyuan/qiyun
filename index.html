@@ -12,7 +12,6 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#fcebf3">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/api.css">
 </head>
 
 <body>
@@ -126,8 +125,8 @@
                 <div class="api-group">
                     <div class="api-label">模型</div>
                     <div class="model-row">
-                        <input type="text" class="api-input" placeholder="未选择模型">
-                        <button class="btn-fetch">拉取模型</button>
+                        <div class="api-select" id="model-select-trigger">未选择模型</div>
+                        <button class="btn-fetch">拉取</button>
                     </div>
                 </div>
 
@@ -151,9 +150,37 @@
             <div class="config-manage-container">
                 <div class="api-label" style="margin-bottom:10px;">API 配置管理</div>
                 <div class="config-row">
-                    <input type="text" class="api-input" placeholder="输入配置名称">
+                    <input type="text" class="api-input" id="config-name-input" placeholder="输入配置名称">
                     <button class="btn-save-config">保存</button>
                 </div>
+
+                <!-- 已保存的配置列表区域 -->
+                <div class="saved-configs-header">
+                    <span class="saved-title">已保存的配置</span>
+                    <span class="btn-clear-all">清空全部</span>
+                </div>
+                
+                <div class="config-list" id="config-list">
+                    <div class="no-config">暂无配置</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模型选择弹窗 -->
+    <div id="modal-model-select" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">选择模型</div>
+                <div class="modal-close-btn" id="btn-close-modal">×</div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-tabs">
+                    <div class="tab-btn active">全部</div>
+                    <div class="tab-btn">常用</div>
+                </div>
+                <!-- 模型列表区域 (暂时留空) -->
+                <div class="model-list"></div>
             </div>
         </div>
     </div>

@@ -1,6 +1,10 @@
 import { switchPage } from './router.js';
+import { initApiSettings } from './api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 初始化 API 模块
+    initApiSettings();
+
     // 监听“设置”按钮点击
     const btnSettings = document.getElementById('btn-settings');
     if (btnSettings) {
