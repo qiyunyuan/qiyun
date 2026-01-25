@@ -12,6 +12,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#fcebf3">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/api.css">
 </head>
 
 <body>
@@ -78,9 +79,81 @@
         </div>
         <!-- 内容区域 -->
         <div class="app-content">
-            <!-- 暂时留空，查看布局效果 -->
-            <div style="padding: 20px;">
-                <p>这里是内容区域（白色背景）</p>
+            <div class="settings-list">
+                <div class="settings-item" id="btn-open-api">
+                    <div class="settings-item-text">API 设置</div>
+                    <div class="settings-arrow">›</div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-text">主题设置</div>
+                    <div class="settings-arrow">›</div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-text">美化设置</div>
+                    <div class="settings-arrow">›</div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-text">数据管理</div>
+                    <div class="settings-arrow">›</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API 设置页面 -->
+    <div id="page-api-settings" class="page">
+        <!-- 顶部标题栏 -->
+        <div class="app-header">
+            <div id="btn-back-settings" class="back-btn">‹</div>
+            <div class="title">API设置</div>
+        </div>
+        <!-- 内容区域 -->
+        <div class="app-content">
+            <div class="api-settings-container">
+                <!-- API 地址 -->
+                <div class="api-group">
+                    <div class="api-label">API 地址</div>
+                    <input type="text" class="api-input" placeholder="请输入 API 地址">
+                </div>
+
+                <!-- API 密钥 -->
+                <div class="api-group">
+                    <div class="api-label">API 密钥</div>
+                    <input type="password" class="api-input" placeholder="请输入 API 密钥">
+                </div>
+
+                <!-- 模型 -->
+                <div class="api-group">
+                    <div class="api-label">模型</div>
+                    <div class="model-row">
+                        <input type="text" class="api-input" placeholder="未选择模型">
+                        <button class="btn-fetch">拉取模型</button>
+                    </div>
+                </div>
+
+                <!-- 额度状态 -->
+                <div class="api-group">
+                    <div class="api-label">额度状态</div>
+                    <div class="quota-row">
+                        <div class="quota-btn active">有额度</div>
+                        <div class="quota-btn">无额度</div>
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="action-row">
+                    <button class="btn-test">测试模型</button>
+                    <button class="btn-save">保存设置</button>
+                </div>
+            </div>
+
+            <!-- API 配置管理 -->
+            <div class="config-manage-container">
+                <div class="api-label" style="margin-bottom:10px;">API 配置管理</div>
+                <div class="config-row">
+                    <input type="text" class="api-input" placeholder="输入配置名称">
+                    <button class="btn-save-config">保存</button>
+                </div>
             </div>
         </div>
     </div>

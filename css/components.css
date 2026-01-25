@@ -5,12 +5,12 @@
     background-color: var(--white);
     color: var(--black);
     border: none;
-    border-radius: var(--radius);
+    border-radius: 20px;
     padding: 15px 0;
     width: calc(100% - 40px);
     font-size: 16px;
     cursor: pointer;
-    margin-top: var(--spacing-btn-top);
+    margin-top: 15px;
     margin-bottom: 20px;
     margin-left: 20px;
     margin-right: 20px;
@@ -25,7 +25,7 @@
 /* 底部区域布局 */
 .bottom-area {
     margin-top: auto;
-    margin-bottom: var(--spacing-bottom);
+    margin-bottom: 100px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -37,7 +37,7 @@
     width: calc(100% - 40px);
     height: 160px; /* 设置合适的高度 */
     margin: 0 20px;
-    border-radius: var(--radius);
+    border-radius: 20px;
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -55,7 +55,7 @@
     width: 100%;
     height: 100%;
     scroll-snap-align: center;
-    border-radius: var(--radius);
+    border-radius: 20px;
     /* 确保背景或内容被圆角裁剪（如果需要） */
     overflow: hidden; 
 }
@@ -111,5 +111,5 @@
 
 .app-name {
     font-size: 14px;
-    color: var(--text-secondary);
+    color: var(--black);
 }

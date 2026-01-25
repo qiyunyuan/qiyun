@@ -1,0 +1,166 @@
+/* API 设置页面专用样式 */
+
+/* 内容容器 */
+.api-settings-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 表单组 */
+.api-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 标签样式 */
+.api-label {
+    font-size: 14px;
+    color: var(--black);
+    font-weight: 500;
+    margin-left: 2px;
+}
+
+/* 输入框样式 */
+.api-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--black);
+    background-color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.api-input:focus {
+    border-color: #ffb7d6; /* 聚焦时粉色边框 */
+}
+
+.api-input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+/* 模型选择行 (Flex布局) */
+.model-row {
+    display: flex;
+    gap: 10px;
+}
+
+.model-row .api-input {
+    flex: 1;
+}
+
+/* 拉取模型按钮 */
+.btn-fetch {
+    padding: 0 15px;
+    height: 44px; /* 与输入框高度一致 (14px font + 12px*2 padding + 2px border approx) */
+    background-color: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--black);
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-fetch:active {
+    background-color: #f5f5f5;
+}
+
+/* 额度状态行 */
+.quota-row {
+    display: flex;
+    gap: 15px;
+}
+
+/* 状态按钮 */
+.quota-btn {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: var(--white);
+    color: var(--black);
+    font-size: 14px;
+    cursor: default; /* 展示用，非点击 */
+    text-align: center;
+}
+
+/* 激活的状态 (有额度 - 粉色) */
+.quota-btn.active {
+    background-color: #eebcd2; /* 截图中的深粉色背景 */
+    color: var(--white);
+    border: none;
+}
+
+/* 底部操作按钮区域 */
+.action-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* 测试模型按钮 (轮廓风格) */
+.btn-test {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 12px;
+    background-color: var(--white);
+    border: 1px solid #ffb7d6;
+    color: #ff8cb8; /* 深粉色文字 */
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-test:active {
+    background-color: #fff0f5;
+}
+
+/* 保存设置按钮 (填充风格) */
+.btn-save {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 12px;
+    background-color: #eebcd2; /* 截图中的深粉色 */
+    border: none;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-save:active {
+    opacity: 0.9;
+}
+
+/* 配置管理区域 */
+.config-manage-container {
+    padding: 0 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.config-row {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-save-config {
+    width: 60px;
+    background-color: #eebcd2;
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}

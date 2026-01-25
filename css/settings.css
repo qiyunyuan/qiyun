@@ -1,0 +1,38 @@
+/* 设置页面样式 */
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px; /* 增加点击区域 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background-color: var(--white);
+}
+
+.settings-item:active {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* 最后一个元素去掉底边框 */
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-item-text {
+    font-size: 16px;
+    color: var(--black);
+    font-weight: 500;
+}
+
+.settings-arrow {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.3);
+    font-family: sans-serif; /* 确保箭头显示正常 */
+}
