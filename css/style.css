@@ -7,6 +7,8 @@
 /* 模块样式 */
 @import "./profile.css";
 @import "./components.css";
+
+/* 功能样式 */
 @import "./settings.css";
 @import "./api.css";
-@import "./presets.css";
+@import "./preset.css";

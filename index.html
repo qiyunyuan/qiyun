@@ -369,7 +369,7 @@
         </div>
     </div>
 
-    <!-- 新增：预设页面 -->
+    <!-- 预设页面 -->
     <div id="page-preset-settings" class="page">
         <!-- 顶部标题栏 -->
         <div class="app-header">
@@ -381,15 +381,15 @@
             
             <!-- 1. 预设管理卡片 -->
             <div class="preset-card">
-                <div class="preset-header-row">
-                    <span>默认对话补全</span>
+                <div class="preset-header-row" id="btn-switch-preset-group">
+                    <span id="current-preset-name">默认对话补全</span>
                     <span class="preset-arrow">›</span>
                 </div>
                 <div class="preset-actions-row">
-                    <button class="preset-btn">重命名</button>
-                    <button class="preset-btn">保存</button>
-                    <button class="preset-btn">另存</button>
-                    <button class="preset-btn delete">删除</button>
+                    <button id="btn-rename-preset" class="preset-btn">重命名</button>
+                    <button id="btn-save-preset" class="preset-btn">保存</button>
+                    <button id="btn-save-as-preset" class="preset-btn">另存</button>
+                    <button id="btn-delete-preset" class="preset-btn delete">删除</button>
                 </div>
             </div>
 
@@ -402,7 +402,7 @@
                         <span class="param-unit">tokens</span>
                     </div>
                     <div class="param-control">
-                        <input type="range" class="slider" min="0" max="2000000" value="30000" step="10000">
+                        <input type="range" id="slider-context" class="slider" min="0" max="2000000" value="30000" step="10000">
                         <input type="number" class="number-input" value="30000">
                     </div>
                 </div>
@@ -416,7 +416,7 @@
                         <span class="param-unit">tokens</span>
                     </div>
                     <div class="param-control">
-                        <input type="range" class="slider" min="0" max="128000" value="64000" step="1000">
+                        <input type="range" id="slider-reply" class="slider" min="0" max="128000" value="64000" step="1000">
                         <input type="number" class="number-input" value="64000">
                     </div>
                 </div>
@@ -430,7 +430,7 @@
                         <span class="param-unit">Temperature</span>
                     </div>
                     <div class="param-control">
-                        <input type="range" class="slider" min="0" max="2" value="0.7" step="0.1">
+                        <input type="range" id="slider-temp" class="slider" min="0" max="2" value="0.7" step="0.1">
                         <input type="number" class="number-input" value="0.7">
                     </div>
                 </div>
@@ -441,6 +441,11 @@
                 <div class="prompt-header">
                     <label class="param-label">提示词</label>
                     <button class="btn-new-prompt">新建</button>
+                </div>
+
+                <!-- 【新增】在这里添加列表容器 -->
+                <div id="prompt-list-container" class="prompt-list">
+                    <!-- JS 会自动往这里填充内容 -->
                 </div>
             </div>
 
@@ -465,7 +470,44 @@
         </div>
     </div>
 
-</div>
+    <!-- 提示词编辑页面 -->
+    <div id="page-prompt-edit" class="page">
+        <!-- 顶部标题栏 -->
+        <div class="app-header">
+            <div id="btn-back-prompt-edit" class="back-btn">‹</div>
+            <div class="title">提示词</div>
+            <div id="btn-save-prompt" class="header-right-btn">保存</div>
+        </div>
+        <!-- 内容区域 -->
+        <div class="app-content preset-edit-container">
+            <div class="edit-group">
+                <label class="edit-label">名称</label>
+                <input type="text" id="edit-prompt-name" class="edit-input" placeholder="提示词名称">
+            </div>
+            <div class="edit-group">
+                <label class="edit-label">内容</label>
+                <textarea id="edit-prompt-content" class="edit-textarea" placeholder="输入提示词内容..."></textarea>
+            </div>
+        </div>
+    </div> <!-- 👈 关键点：这里加了一个闭合标签，把提示词页面先关上 -->
+
+    <!-- 预设分组列表页面 (现在它自由啦，是独立的页面了) -->
+    <div id="page-preset-groups" class="page">
+        <!-- 顶部标题栏 -->
+        <div class="app-header">
+            <div id="btn-back-preset-groups" class="back-btn">‹</div>
+            <div class="title">预设分组</div>
+        </div>
+        <!-- 内容区域 -->
+        <div class="app-content" style="background-color: #fff;">
+            <!-- 列表容器 -->
+            <div id="preset-group-list" class="group-list">
+                <!-- JS 会在这里生成列表项 -->
+            </div>
+        </div>
+    </div>
+
+</div> <!-- 👈 这个是 container 的闭合标签 -->
 
 <script type="module" src="js/script.js"></script>
 </body>

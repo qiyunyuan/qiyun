@@ -1,0 +1,392 @@
+/* 预设页面容器 */
+.preset-container {
+    padding: 20px;
+    background-color: var(--white); /* 背景改为纯白 */
+    height: 100%; /* 撑满高度 */
+}
+
+/* 移除原来的卡片样式，改为普通的分块容器 */
+.preset-card {
+    background-color: transparent; /* 透明背景 */
+    border-radius: 0; /* 去掉圆角 */
+    padding: 10px 0; /* 上下给点间距 */
+    margin-bottom: 20px; /* 块与块之间的间距 */
+    box-shadow: none; /* 去掉阴影 */
+    border-bottom: 1px solid #f5f5f5; /* 加一条淡淡的分割线 */
+}
+
+/* 最后一个块不需要分割线 */
+.preset-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* --- 第一部分：预设管理 --- */
+.preset-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 16px; /* 稍微加大一点标题 */
+    font-weight: 600;
+    color: #333;
+    padding: 12px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* 鼠标放上去变色，提示可以点击 */
+.preset-header-row:hover {
+    background-color: #f5f5f5;
+}
+
+/* 蓝色名字区域 */
+#current-preset-name {
+    color: #333; 
+}
+
+.preset-arrow {
+    color: #ccc;
+    font-size: 20px;
+}
+
+.preset-actions-row {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.preset-btn {
+    flex: 1;
+    padding: 8px 0;
+    border: 1px solid #eee;
+    background-color: #fff; /* 按钮保持白色背景 */
+    border-radius: 8px; /* 按钮圆角稍微小一点 */
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 给按钮加一点点微弱的阴影，更有质感 */
+}
+
+.preset-btn:active {
+    background-color: #f9f9f9;
+    transform: translateY(1px);
+}
+
+.preset-btn.delete {
+    color: #ff6b81;
+    border-color: #ffeef1;
+    background-color: #fff5f7;
+}
+
+/* --- 第二部分：参数滑块 --- */
+.param-item {
+    margin-bottom: 25px; /* 增加参数项之间的间距 */
+}
+
+.param-item:last-child {
+    margin-bottom: 10px;
+}
+
+.param-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.param-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.param-unit {
+    font-size: 12px;
+    color: #999;
+}
+
+.param-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 滑块样式定制 */
+.slider {
+    appearance: none;
+    width: 100%;
+    height: 4px; /* 滑块轨道变细一点，更精致 */
+    background: #f0f0f0;
+    border-radius: 2px;
+    outline: none;
+    flex: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px; /* 滑块头稍微大一点 */
+    height: 20px;
+    background: #fff; 
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #e0e0e0; /* 灰色边框 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 柔和的阴影 */
+}
+
+/* 输入框样式 */
+.number-input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    outline: none;
+    background-color: #f9f9f9; /* 输入框稍微带点灰底 */
+}
+
+.number-input:focus {
+    border-color: #4a90e2;
+    background-color: #fff;
+}
+
+/* --- 第三部分：提示词 --- */
+.prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.btn-new-prompt {
+    padding: 6px 16px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 20px; /* 胶囊形状 */
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-new-prompt:hover {
+    background-color: #e0e0e0;
+}
+
+/* --- 提示词编辑页面样式 --- */
+/* 右上角保存按钮 */
+.header-right-btn {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ff6b81; /* 粉色文字 */
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* 编辑容器 */
+.preset-edit-container {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.edit-group {
+    margin-bottom: 20px;
+}
+
+.edit-label {
+    display: block;
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+/* 输入框通用样式 */
+.edit-input,
+.edit-textarea {
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 15px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+    border-color: #ffb6c1; /* 聚焦时变粉 */
+}
+
+.edit-textarea {
+    height: 450px;
+    resize: none;
+    line-height: 1.5;
+}
+
+/* --- 提示词列表样式 --- */
+.prompt-list {
+    margin-top: 15px;
+}
+
+.prompt-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    background: #fff;
+    transition: background-color 0.2s;
+}
+
+.prompt-item.dragging {
+    opacity: 0.5;
+    background: #f9f9f9;
+}
+
+/* 1. 拖拽把手 (最左边) */
+.drag-handle {
+    width: 30px;
+    color: #ddd;
+    font-size: 20px;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    user-select: none; /* 防止选中文字 */
+}
+
+/* 2. 名称区域 */
+.prompt-info {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 3. 操作按钮区域 */
+.prompt-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-text-btn {
+    font-size: 12px;
+    color: #666;
+    background: none;
+    border: 1px solid #eee;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-text-btn.delete {
+    color: #ff6b81;
+    border-color: #ffeef1;
+    background-color: #fff5f7;
+}
+
+/* 4. 开关样式 (Toggle Switch) */
+.prompt-switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.prompt-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider-round {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider-round:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider-round {
+    background-color: #ffb6c1; /* 粉色激活状态 */
+}
+
+input:checked + .slider-round:before {
+    transform: translateX(16px);
+}
+
+/* --- 第四部分：分组选择列表样式 --- */
+/* 列表容器 */
+.group-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 单个列表项 */
+.group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.group-item:active {
+    background-color: #f9f9f9;
+}
+
+/* 名字 */
+.group-name {
+    font-size: 15px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* 当前选中的项，给个颜色标记一下 */
+.group-item.active .group-name {
+    color: #ff6b81; /* 粉色高亮 */
+    font-weight: 600;
+}
+
+/* 右侧箭头 */
+.group-arrow {
+    color: #ccc;
+    font-size: 18px;
+}
