@@ -44,6 +44,22 @@ export function initPreset() {
     // 1. 进页面先加载当前预设的数据到界面
     loadPresetToUI(currentPresetId);
 
+    // 监听主页的“预设”按钮
+    const btnOpenPreset = document.getElementById('btn-open-preset');
+    if (btnOpenPreset) {
+        btnOpenPreset.addEventListener('click', () => {
+            // 1. 强制从硬盘读取“上次保存”的数据
+            // 这步操作会把你在内存里瞎改但没保存的提示词、滑块全冲掉
+            const saved = localStorage.getItem('my_presets_data');
+            if (saved) {
+                allPresets = JSON.parse(saved);
+            }
+            
+            // 2. 重新加载界面
+            loadPresetToUI(currentPresetId);
+        });
+    }
+
     // === 顶部按钮事件监听 ===
 
     // 1. 红框点击：去选择分组页面
@@ -337,7 +353,6 @@ function renderPromptList(prompts) {
         div.querySelector('.delete-btn').addEventListener('click', () => {
             if (confirm(`确定要删除 "${item.name}" 吗？`)) {
                 prompts.splice(index, 1);
-                saveData();
                 renderPromptList(prompts); // 重新渲染
             }
         });
@@ -382,7 +397,6 @@ function savePromptInternal() {
             enabled: true 
         });
     }
-    saveData();
     
     renderPromptList(prompts);
     switchPage('page-preset-settings');
