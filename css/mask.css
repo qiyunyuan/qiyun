@@ -1,0 +1,171 @@
+/* css/mask.css */
+
+/* 头部右侧按钮 (新建/保存) */
+.header-right-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ff6b81;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- 面具列表样式 --- */
+.mask-list {
+    padding: 0;
+}
+
+.mask-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    background: #fff;
+}
+
+.mask-item:active {
+    background-color: #fafafa;
+}
+
+.mask-avatar-preview {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #eee;
+    margin-right: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.mask-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mask-remark {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.mask-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.mask-arrow {
+    font-size: 18px;
+    color: #ddd;
+}
+
+/* --- 编辑面具样式 --- */
+.mask-edit-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    /* 去掉 min-height，解决滑动卡死的问题 */
+    padding-bottom: 40px; /* 底部多留点空隙 */
+}
+
+.edit-avatar-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.edit-avatar-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f7f7f7;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #aaa;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.mask-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    padding-left: 4px;
+}
+
+/* 输入框样式 */
+.mask-input, 
+.mask-textarea {
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    background-color: #fff;
+    color: #333;
+    transition: all 0.2s;
+}
+
+.mask-input {
+    padding: 12px 15px;
+}
+
+.mask-textarea {
+    padding: 15px;
+    height: 200px;
+    resize: none;
+    line-height: 1.6;
+}
+
+.mask-input:focus,
+.mask-textarea:focus {
+    border-color: #ffd9e8;
+    box-shadow: 0 0 0 2px rgba(255, 217, 232, 0.3);
+}
+
+.mask-input::placeholder,
+.mask-textarea::placeholder {
+    color: #ccc;
+}
+
+/* 删除按钮 - 改小了，也不强制沉底了 */
+.btn-delete-mask {
+    width: 120px; /* 宽度改小 */
+    margin: 30px auto 0; /* 上方留空，自动居中 */
+    padding: 8px 0; /* 高度改小 */
+    background-color: #f48fb1;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px; /* 字体改小 */
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(244, 143, 177, 0.4);
+    transition: transform 0.1s;
+    display: block;
+}
+
+.btn-delete-mask:active {
+    transform: scale(0.95);
+}

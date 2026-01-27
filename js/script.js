@@ -76,5 +76,49 @@ document.addEventListener('DOMContentLoaded', () => {
             switchPage('page-home'); // 这里看你是想返回主页还是设置页，通常预设在主页入口，所以返回主页
         });
     }
+
+        // --- 面具功能区 ---
+
+    // 1. 主页点击“面具”图标 -> 进入面具列表
+    const btnOpenMasks = document.getElementById('btn-open-masks');
+    if (btnOpenMasks) {
+        btnOpenMasks.addEventListener('click', () => {
+            switchPage('page-masks');
+        });
+    }
+
+    // 2. 面具列表点击“返回” -> 回主页
+    const btnBackHomeFromMasks = document.getElementById('btn-back-home-from-masks');
+    if (btnBackHomeFromMasks) {
+        btnBackHomeFromMasks.addEventListener('click', () => {
+            switchPage('page-home');
+        });
+    }
+
+    // 3. 面具列表点击“新建” -> 进入编辑页
+    const btnNewMask = document.getElementById('btn-new-mask');
+    if (btnNewMask) {
+        btnNewMask.addEventListener('click', () => {
+            // 这里以后可以加清空表单的逻辑
+            switchPage('page-mask-edit');
+        });
+    }
+
+    // 4. 编辑页点击“返回” -> 回面具列表
+    const btnBackMasks = document.getElementById('btn-back-masks');
+    if (btnBackMasks) {
+        btnBackMasks.addEventListener('click', () => {
+            switchPage('page-masks');
+        });
+    }
+
+    // 5. 示例：点击列表里的某一项也能进编辑页
+    const demoMaskItem = document.getElementById('mask-demo-1');
+    if (demoMaskItem) {
+        demoMaskItem.addEventListener('click', () => {
+            switchPage('page-mask-edit');
+        });
+    }
+
 });
 
