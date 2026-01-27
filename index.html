@@ -43,13 +43,13 @@
             <div class="apps-grid">
                 <div class="app-item">
                     <div class="app-icon"></div>
-                    <div class="app-name">世界观</div>
+                    <div class="app-name">世界</div>
                 </div>
                 <div class="app-item" id="btn-open-masks">
                     <div class="app-icon"></div>
                     <div class="app-name">面具</div>
                 </div>
-                <div class="app-item">
+                <div class="app-item" id="btn-open-worldbook">
                     <div class="app-icon"></div>
                     <div class="app-name">世界书</div>
                 </div>
@@ -569,6 +569,135 @@
         <button id="btn-delete-mask-action" class="btn-delete-mask">删除</button>
     </div>
 </div>
+
+    <!-- 世界书主菜单 -->
+    <div id="page-worldbook" class="page">
+        <div class="app-header">
+            <div id="btn-back-worldbook" class="back-btn">‹</div>
+            <div class="title">世界书</div>
+        </div>
+        <div class="app-content">
+            <div class="worldbook-menu">
+                <button id="btn-wb-global" class="wb-menu-btn">全 局</button>
+                <button id="btn-wb-world" class="wb-menu-btn">世 界</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局世界书列表页 -->
+    <div id="page-worldbook-global" class="page">
+        <div class="app-header">
+            <div id="btn-back-wb-global" class="back-btn">‹</div>
+            <div class="title">全局</div>
+            <!-- 右上角的新建按钮 -->
+            <div id="btn-new-wb" class="header-right-btn">新建</div>
+        </div>
+        
+        <div class="app-content">
+            <!-- 列表容器 -->
+            <div id="wb-list" class="wb-list">
+                <!-- 这是一个示例条目，JS会自动生成类似的 -->
+                <!-- <div class="wb-item">
+                    <span class="wb-name">示例世界书</span>
+                    <span class="wb-arrow">›</span>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- 新建世界书的弹窗 (默认隐藏) -->
+        <div id="modal-new-wb" class="modal-overlay">
+            <div class="modal-box">
+                <div class="modal-title">新建世界书</div>
+                <input type="text" id="input-wb-name" class="modal-input" placeholder="给它起个名字吧...">
+                <div class="modal-btns">
+                    <button id="btn-cancel-wb" class="modal-btn cancel">取消</button>
+                    <button id="btn-confirm-wb" class="modal-btn confirm">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 世界书条目详情页 -->
+    <div id="page-worldbook-entry" class="page">
+        <div class="app-header">
+            <div id="btn-back-wb-entry" class="back-btn">‹</div>
+            <div class="title" id="wb-entry-title">条目名称</div>
+            <div id="btn-new-entry-content" class="header-right-btn">新建</div>
+        </div>
+        <div class="app-content">
+            <div id="wb-entry-list"><!-- 这里以后放具体内容列表 --></div>
+            <div style="padding: 20px; color: #999; text-align: center;">暂无内容</div>
+        </div>
+    </div>
+
+    <!-- 世界书条目编辑页面 -->
+    <div id="page-worldbook-edit" class="page">
+        <div class="app-header">
+            <div id="btn-back-wb-edit" class="back-btn">‹</div>
+            <div class="title">条目</div>
+            <div id="btn-save-wb" class="header-right-btn">保存</div>
+        </div>
+        <div class="app-content wb-edit-content">
+            <!-- 标题 -->
+            <div class="wb-form-group">
+                <label>标题</label>
+                <input type="text" id="wb-input-title" class="wb-input" placeholder="输入条目标题">
+            </div>
+
+            <!-- 条目状态 -->
+            <div class="wb-form-group">
+                <label>条目状态</label>
+                <select id="wb-select-status" class="wb-select">
+                    <option value="permanent">🔵 蓝灯 (永久开启)</option>
+                    <option value="keyword">🟢 绿灯 (关键词触发)</option>
+                </select>
+            </div>
+
+            <!-- 关键词 -->
+            <div class="wb-form-group">
+                <label>关键词</label>
+                <input type="text" id="wb-input-keys" class="wb-input" placeholder="多关键词用逗号隔开">
+            </div>
+
+            <!-- 触发策略 -->
+            <div class="wb-form-group">
+                <label>触发策略 / 插入位置</label>
+                <select id="wb-select-strategy" class="wb-select">
+                    <option value="before_char">角色定义之前</option>
+                    <option value="after_char">角色定义之后</option>
+                    <option value="depth">系统在深度 D 处</option>
+                </select>
+            </div>
+
+            <!-- 深度 (默认隐藏) -->
+            <div class="wb-form-group" id="group-wb-depth" style="display: none;">
+                <label>插入深度</label>
+                <input type="number" id="wb-input-depth" class="wb-input" value="4">
+            </div>
+
+            <!-- 顺序 & 概率 (一行两个) -->
+            <div class="wb-form-row">
+                <div class="wb-form-group half">
+                    <label>顺序</label>
+                    <input type="number" id="wb-input-order" class="wb-input" value="100">
+                </div>
+                <div class="wb-form-group half">
+                    <label>触发概率 (%)</label>
+                    <input type="number" id="wb-input-prob" class="wb-input" value="100">
+                </div>
+            </div>
+
+            <!-- 内容 -->
+            <div class="wb-form-group">
+                <div class="label-row">
+                    <label>内容</label>
+                    <span class="token-count">词符: <span id="wb-token-num">0</span></span>
+                </div>
+                <textarea id="wb-input-content" class="wb-textarea" placeholder="输入世界书内容..."></textarea>
+            </div>
+        </div>
+    </div>
+
 
 
 </div> <!-- 👈 这个是 container 的闭合标签 -->

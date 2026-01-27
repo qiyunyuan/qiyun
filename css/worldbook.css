@@ -1,0 +1,391 @@
+/* ============================
+   世界书主菜单
+   ============================ */
+.worldbook-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 140px; /* 距离顶部一点距离 */
+    gap: 50px; /* 两个按钮之间的间距 */
+}
+
+/* 萌化版大按钮 - 棉花糖风格 */
+.wb-menu-btn {
+    width: 220px;
+    height: 80px;
+    /* 颜色调得更奶一点，像草莓牛奶 */
+    background-color: #ffd9e8; 
+    /* 只要一点点边框，或者干脆不要，这里用一点点深粉色描边增加精致感 */
+    border: 2px solid #ffcce0; 
+    border-radius: 40px; /* 圆润 */
+    
+    font-size: 20px;
+    font-weight: bold;
+    color: #e17499; /* 深粉色文字 */
+    cursor: pointer;
+    
+    /* 关键在这里：阴影要大、要淡、要粉 */
+    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+    transition: all 0.2s ease;
+    
+    /* 让文字稍微有点间距，显得不那么挤 */
+    letter-spacing: 2px;
+}
+
+/* 点击时 */
+.wb-menu-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
+}
+
+/* ============================
+   全局列表页样式
+   ============================ */
+
+.wb-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 列表条目 */
+.wb-item {
+    height: 70px; /* 稍微高一点放按钮 */
+    background-color: var(--white);
+    border: 2px solid #ffcce0; /* 换成软软的粉色边框 */
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2); /* 粉色光晕 */
+    transition: all 0.2s;
+}
+
+.wb-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4);
+}
+
+.wb-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555; /* 字体颜色深灰一点，不那么生硬 */
+    flex: 1; /* 名字占据剩余空间 */
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 操作按钮区域 */
+.wb-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* 通用小按钮 */
+.wb-action-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+/* 重命名按钮 - 浅蓝/浅紫风格 */
+.btn-rename {
+    background-color: #e6e6fa;
+    color: #6a5acd;
+}
+
+/* 删除按钮 - 浅红风格 */
+.btn-delete {
+    background-color: #ffe4e1;
+    color: #d87093;
+}
+
+/* ============================
+   新建弹窗样式
+   ============================ */
+.modal-overlay {
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6); /* 遮罩改浅一点，朦胧感 */
+    backdrop-filter: blur(2px); /* 加点模糊 */
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex; /* 激活时显示 */
+}
+
+.modal-box {
+    width: 280px;
+    background-color: #fff;
+    border: 3px solid #ffcce0; /* 弹窗也换成粉色边框 */
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 15px 40px rgba(255, 182, 193, 0.3);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #d87093;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ffe4e1;
+    border-radius: 15px;
+    outline: none;
+    font-size: 14px;
+    background-color: #fffafa;
+    color: #555;
+}
+
+.modal-input:focus {
+    border-color: #ffb7c5;
+    background-color: #fff;
+}
+
+.modal-btns {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 10px 25px;
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.modal-btn:active {
+    transform: scale(0.95);
+}
+
+.modal-btn.cancel {
+    background-color: #f0f0f0;
+    color: #888;
+}
+
+.modal-btn.confirm {
+    background-color: #ffcce0;
+    color: #d87093;
+}
+
+/* ============================
+   世界书编辑页样式
+   ============================ */
+
+
+.wb-edit-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.wb-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wb-form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.wb-form-group.half {
+    flex: 1;
+}
+
+.wb-form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #e17499;
+    margin-left: 5px;
+}
+
+/* 输入框通用样式 */
+.wb-input, .wb-select, .wb-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ffcce0;
+    border-radius: 15px;
+    background-color: #fffafa;
+    color: #555;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.wb-input:focus, .wb-select:focus, .wb-textarea:focus {
+    border-color: #ffb7c5;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(255, 182, 193, 0.2);
+}
+
+.wb-textarea {
+    height: 150px;
+    resize: none;
+    line-height: 1.5;
+}
+
+/* 词符计数 */
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.token-count {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* ... (文件原本的内容) ... */
+
+/* ============================
+   条目列表项样式 (新加的)
+   ============================ */
+
+/* 列表容器，确保你在 HTML 里有个 id="wb-entry-list" 的 div */
+#wb-entry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.entry-item {
+    background: #fff;
+    border: 2px solid #ffcce0;
+    border-radius: 15px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.15);
+}
+
+/* 左侧区域：开关 + 灯 + 标题 */
+.entry-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1; /* 撑满剩余空间 */
+    overflow: hidden;
+}
+
+/* 1. 胶囊状开关 */
+.capsule-switch {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background-color: #eee;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-shrink: 0; /* 防止被挤压 */
+}
+
+.capsule-switch.active {
+    background-color: #ffb7c5; /* 激活时的粉色 */
+}
+
+.capsule-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.capsule-switch.active::after {
+    transform: translateX(16px);
+}
+
+/* 2. 状态灯 */
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #87CEFA; /* 默认蓝色：代表常驻/永久 */
+    box-shadow: 0 0 5px #87CEFA;
+    flex-shrink: 0;
+    transition: all 0.3s;
+}
+
+/* 关键词策略时变绿 */
+.status-dot.type-keyword {
+    background-color: #90EE90; /* 绿色：代表关键词 */
+    box-shadow: 0 0 5px #90EE90;
+}
+
+/* 3. 标题名 */
+.entry-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 右侧按键区域 */
+.entry-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.entry-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-edit-entry {
+    background-color: #fff0f5;
+    color: #d87093;
+}
+
+.btn-del-entry {
+    background-color: #f5f5f5;
+    color: #aaa;
+}

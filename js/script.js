@@ -2,7 +2,8 @@ import { switchPage } from './router.js';
 import { initApiSettings } from './api.js';
 import { initBeautify } from './beautify.js';
 import { initPreset } from './preset.js';
-import { initMask } from './mask.js'; // <--- 新增这行
+import { initMask } from './mask.js'; 
+import { initWorldBook } from './worldbook.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化 API 模块
@@ -16,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初始化面具模块 (逻辑全移到 mask.js 了)
     initMask(); 
+
+    // 初始化世界书模块
+    initWorldBook();
 
     // --- 通用路由逻辑 ---
 
@@ -82,4 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
             switchPage('page-home');
         });
     }
+
+    // 监听“世界书”图标点击
+    const btnOpenWorldBook = document.getElementById('btn-open-worldbook');
+    if (btnOpenWorldBook) {
+        btnOpenWorldBook.addEventListener('click', () => {
+            switchPage('page-worldbook');
+        });
+    }
+
 });
