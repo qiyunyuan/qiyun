@@ -1,17 +1,5 @@
 /* css/mask.css */
 
-/* 头部右侧按钮 (新建/保存) */
-.header-right-btn {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: #ff6b81;
-    cursor: pointer;
-    font-weight: bold;
-}
-
 /* --- 面具列表样式 --- */
 .mask-list {
     padding: 0;
@@ -36,9 +24,11 @@
     border-radius: 50%;
     background-color: #eee;
     margin-right: 15px;
-    background-size: cover;
+    background-size: cover; /* 确保图片填满圆圈 */
     background-position: center;
+    flex-shrink: 0; /* 防止被挤压 */
 }
+
 
 .mask-info {
     flex: 1;
@@ -133,7 +123,7 @@
 
 .mask-textarea {
     padding: 15px;
-    height: 200px;
+    height: 220px;
     resize: none;
     line-height: 1.6;
 }
@@ -151,8 +141,8 @@
 
 /* 删除按钮 - 改小了，也不强制沉底了 */
 .btn-delete-mask {
-    width: 120px; /* 宽度改小 */
-    margin: 30px auto 0; /* 上方留空，自动居中 */
+    width: 140px; /* 宽度改小 */
+    margin: 20px auto 0; /* 上方留空，自动居中 */
     padding: 8px 0; /* 高度改小 */
     background-color: #f48fb1;
     color: white;

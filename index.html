@@ -541,7 +541,10 @@
     <div class="app-content mask-edit-content">
         <!-- 头像区域 -->
         <div class="edit-avatar-section">
-            <div class="edit-avatar-circle">
+            <!-- 隐藏的文件上传控件 -->
+            <input type="file" id="mask-avatar-input" accept="image/*" style="display: none;">
+            
+            <div class="edit-avatar-circle" id="mask-avatar-wrapper">
                 <span>头像</span>
             </div>
         </div>
@@ -549,21 +552,21 @@
         <!-- 输入表单 -->
         <div class="mask-form">
             <div class="form-group">
-                <label>名称</label>
-                <input type="text" class="mask-input" placeholder="输入角色名称">
+                <label>备注</label>
+                <input type="text" id="mask-remark-input" class="mask-input" placeholder="输入备注信息">
             </div>
             <div class="form-group">
-                <label>备注</label>
-                <input type="text" class="mask-input" placeholder="输入备注信息">
+                <label>名称</label>
+                <input type="text" id="mask-name-input" class="mask-input" placeholder="输入角色名称">
             </div>
             <div class="form-group">
                 <label>描述</label>
-                <textarea class="mask-textarea" placeholder="描述（生日、性别、背景、外貌、性格等等）"></textarea>
+                <textarea id="mask-desc-input" class="mask-textarea" placeholder="描述（生日、性别、背景、外貌、性格等等）"></textarea>
             </div>
         </div>
 
         <!-- 删除按钮 -->
-        <button class="btn-delete-mask">删除</button>
+        <button id="btn-delete-mask-action" class="btn-delete-mask">删除</button>
     </div>
 </div>
 
