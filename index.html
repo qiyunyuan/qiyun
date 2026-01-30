@@ -570,30 +570,33 @@
     </div>
 </div>
 
-    <!-- 世界书主菜单 -->
+    <!-- 全局世界书列表页 -->
     <div id="page-worldbook" class="page">
         <div class="app-header">
             <div id="btn-back-worldbook" class="back-btn">‹</div>
             <div class="title">世界书</div>
-        </div>
-        <div class="app-content">
-            <div class="worldbook-menu">
-                <button id="btn-wb-global" class="wb-menu-btn">全 局</button>
-                <button id="btn-wb-world" class="wb-menu-btn">世 界</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 全局世界书列表页 -->
-    <div id="page-worldbook-global" class="page">
-        <div class="app-header">
-            <div id="btn-back-wb-global" class="back-btn">‹</div>
-            <div class="title">全局</div>
-            <!-- 右上角的新建按钮 -->
-            <div id="btn-new-wb" class="header-right-btn">新建</div>
+           
         </div>
         
+        <!-- 3. 内容区域-->
         <div class="app-content">
+
+            <!-- 新增：操作栏 (粉色背景延伸下来一点点) -->
+            <div class="wb-toolbar">
+                <button id="btn-new-tag" class="wb-tool-btn left">
+                    <span class="icon">+</span> 标签
+                </button>
+                <button id="btn-new-wb" class="wb-tool-btn right">
+                    <span class="icon">+</span> 世界书
+                </button>
+            </div>
+
+            <!-- 新增：标签栏 (独立一行) -->
+            <div id="wb-tag-bar" class="wb-tag-bar">
+                <div class="wb-tag active">全部</div>
+                <!-- JS 会在这里插入标签 -->
+            </div>
+
             <!-- 列表容器 -->
             <div id="wb-list" class="wb-list">
                 <!-- 这是一个示例条目，JS会自动生成类似的 -->
@@ -609,9 +612,26 @@
             <div class="modal-box">
                 <div class="modal-title">新建世界书</div>
                 <input type="text" id="input-wb-name" class="modal-input" placeholder="给它起个名字吧...">
+                <!-- 选择标签 -->
+                <div class="modal-section-title">选择标签</div>
+                <div id="modal-tag-list" class="modal-tags-container">
+                    <!-- JS 会在这里生成可点击的标签丸子 -->
+                </div>
                 <div class="modal-btns">
                     <button id="btn-cancel-wb" class="modal-btn cancel">取消</button>
                     <button id="btn-confirm-wb" class="modal-btn confirm">确定</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 新建标签的弹窗 -->
+        <div id="modal-new-tag" class="modal-overlay">
+            <div class="modal-box">
+                <div class="modal-title">新建标签</div>
+                <input type="text" id="input-tag-name" class="modal-input" placeholder="输入标签名...">
+                <div class="modal-btns">
+                    <button id="btn-cancel-tag" class="modal-btn cancel">取消</button>
+                    <button id="btn-confirm-tag" class="modal-btn confirm">确定</button>
                 </div>
             </div>
         </div>

@@ -16,153 +16,346 @@ export function initWorldBook() {
 
        // 条目页面的返回逻辑
     const btnBackEntry = document.getElementById('btn-back-wb-entry');
-    if (btnBackEntry) btnBackEntry.addEventListener('click', () => switchPage('page-worldbook-global'));
+        if (btnBackEntry) btnBackEntry.addEventListener('click', () => switchPage('page-worldbook'));
+
 
 
     // 2. 弹窗与列表逻辑
     const btnNewWb = document.getElementById('btn-new-wb');
-    const modal = document.getElementById('modal-new-wb');
-    const btnCancel = document.getElementById('btn-cancel-wb');
-    const btnConfirm = document.getElementById('btn-confirm-wb');
-    const inputName = document.getElementById('input-wb-name');
+    const btnNewTag = document.getElementById('btn-new-tag'); // 新增
+    
+    // 世界书弹窗元素
+    const modalWb = document.getElementById('modal-new-wb');
+    const btnCancelWb = document.getElementById('btn-cancel-wb');
+    const btnConfirmWb = document.getElementById('btn-confirm-wb');
+    const inputWbName = document.getElementById('input-wb-name');
+    const modalTagList = document.getElementById('modal-tag-list'); // 弹窗里的标签列表
+    
+    // 标签弹窗元素
+    const modalTag = document.getElementById('modal-new-tag');
+    const btnCancelTag = document.getElementById('btn-cancel-tag');
+    const btnConfirmTag = document.getElementById('btn-confirm-tag');
+    const inputTagName = document.getElementById('input-tag-name');
+
     const listContainer = document.getElementById('wb-list');
-    const modalTitle = modal.querySelector('.modal-title');
+    const tagBarContainer = document.getElementById('wb-tag-bar'); // 顶部的标签栏
+    const modalTitle = modalWb.querySelector('.modal-title');
 
-    let currentEditingItem = null;
+    let currentEditingItem = null; // 当前正在编辑的世界书 DOM
+    let currentSelectedTagInModal = '默认'; // 弹窗里选中的标签
+    let currentFilterTag = '全部'; // 顶部当前筛选的标签
 
-    // ★ 新增：保存世界书列表到本地
+    // ===========================
+    // ★ 核心数据操作
+    // ===========================
+
+    // 获取所有标签
+    function getTags() {
+        const saved = localStorage.getItem('my_wb_tags');
+        return saved ? JSON.parse(saved) : ['默认'];
+    }
+
+    // 保存标签
+    function saveTags(tags) {
+        localStorage.setItem('my_wb_tags', JSON.stringify(tags));
+    }
+
+    // 保存世界书列表 (结构: {name:Str, tag:Str})
     function saveWorldBooks() {
         const books = [];
         const items = listContainer.querySelectorAll('.wb-item');
         items.forEach(item => {
-            books.push(item.querySelector('.wb-name').textContent);
+            books.push({
+                name: item.querySelector('.wb-name').textContent,
+                tag: item.dataset.tag || '默认'
+            });
         });
         localStorage.setItem('my_worldbooks_list', JSON.stringify(books));
     }
 
-    // ★ 新增：加载世界书列表
+    // 加载世界书列表
     function loadWorldBooks() {
         const saved = localStorage.getItem('my_worldbooks_list');
+        listContainer.innerHTML = ''; // 清空
+        
         if (saved) {
             const books = JSON.parse(saved);
-            listContainer.innerHTML = ''; // 清空现有
-            books.forEach(name => addWorldBookItem(name, false)); // false代表加载模式，不重复保存
+            books.forEach(book => {
+                // 兼容旧数据：如果是字符串，就转成对象
+                if (typeof book === 'string') {
+                    addWorldBookItem(book, '默认', false);
+                } else {
+                    addWorldBookItem(book.name, book.tag, false);
+                }
+            });
         }
+        filterListByTag(currentFilterTag); // 加载完筛选一下
     }
 
-    const openModal = (item = null) => {
-        currentEditingItem = item;
-        modal.classList.add('active');
-        if (item) {
-            modalTitle.textContent = "重命名世界书";
-            inputName.value = item.querySelector('.wb-name').textContent;
-        } else {
-            modalTitle.textContent = "新建世界书";
-            inputName.value = '';
-        }
-        inputName.focus();
-    };
+    // ===========================
+    // ★ 标签栏逻辑 (顶部)
+    // ===========================
+    
+    // ===========================
+    // ★ 标签栏逻辑 (顶部) - 已更新删除功能
+    // ===========================
+    
+    function renderTagBar() {
+        // 获取最新标签列表
+        const customTags = getTags(); 
+        // 组合显示：全部 + (默认+自定义)
+        // 注意：这里为了逻辑简单，我们把'默认'也视为普通标签渲染，但'全部'是特殊的
+        const displayTags = ['全部', ...customTags];
+        
+        tagBarContainer.innerHTML = '';
+        
+        displayTags.forEach(tag => {
+            const div = document.createElement('div');
+            div.className = `wb-tag ${tag === currentFilterTag ? 'active' : ''}`;
+            
+            // 标签名文本
+            const spanName = document.createElement('span');
+            spanName.textContent = tag;
+            div.appendChild(spanName);
 
-    const closeModal = () => {
-        modal.classList.remove('active');
-        currentEditingItem = null;
-    };
-
-    if (btnNewWb) btnNewWb.addEventListener('click', () => openModal(null));
-    if (btnCancel) btnCancel.addEventListener('click', closeModal);
-
-    // 确认按钮逻辑
-    if (btnConfirm) {
-        btnConfirm.addEventListener('click', () => {
-            const name = inputName.value.trim();
-            if (!name) return; // 名字为空不处理
-
-            if (currentEditingItem) {
-                // === 修改逻辑 ===
+            // ★ 只有不是“全部”且不是“默认”的标签，才显示删除按钮
+            if (tag !== '全部' && tag !== '默认') {
+                const btnDel = document.createElement('span');
+                btnDel.className = 'tag-del-btn';
+                btnDel.textContent = '×';
                 
-                // 1. 先获取旧名字（搬家前的地址）
-                const oldName = currentEditingItem.querySelector('.wb-name').textContent;
-                
-                // 2. 更新界面上的名字
-                currentEditingItem.querySelector('.wb-name').textContent = name;
-                
-                // ★ 3. 搬家！把旧名字下的数据，移动到新名字下
-                if (oldName !== name) {
-                    const oldData = localStorage.getItem('wb_data_' + oldName);
-                    if (oldData) {
-                        localStorage.setItem('wb_data_' + name, oldData); // 存到新家
-                        localStorage.removeItem('wb_data_' + oldName);    // 拆掉旧家
+                // 删除事件
+                btnDel.addEventListener('click', (e) => {
+                    e.stopPropagation(); // 防止触发标签切换
+                    
+                    if (confirm(`确定要删除标签【${tag}】吗？\n该标签下的世界书将移动到“默认”标签。`)) {
+                        // 1. 从标签列表中移除
+                        const newTags = customTags.filter(t => t !== tag);
+                        saveTags(newTags);
+
+                        // 2. 把该标签下的书移动到 '默认'
+                        const items = listContainer.querySelectorAll('.wb-item');
+                        let hasChange = false;
+                        items.forEach(item => {
+                            if (item.dataset.tag === tag) {
+                                item.dataset.tag = '默认';
+                                hasChange = true;
+                            }
+                        });
+                        
+                        if (hasChange) {
+                            saveWorldBooks(); // 保存书籍变更
+                        }
+
+                        // 3. 如果当前正看着这个标签，就切回“全部”
+                        if (currentFilterTag === tag) {
+                            currentFilterTag = '全部';
+                        }
+
+                        // 4. 刷新界面
+                        renderTagBar();
+                        filterListByTag(currentFilterTag);
                     }
-                }
-                
-                saveWorldBooks(); // 保存列表
-            } else {
-                // === 新建逻辑 ===
-                addWorldBookItem(name);
+                });
+                div.appendChild(btnDel);
             }
-            closeModal();
+
+            // 点击标签切换筛选
+            div.addEventListener('click', () => {
+                document.querySelectorAll('.wb-tag').forEach(t => t.classList.remove('active'));
+                div.classList.add('active');
+                currentFilterTag = tag;
+                filterListByTag(tag);
+            });
+            
+            tagBarContainer.appendChild(div);
         });
     }
 
-    // 添加列表项函数 (增加 save 参数，默认 true)
-    function addWorldBookItem(name, shouldSave = true) {
+    // 根据标签筛选列表显示
+    function filterListByTag(tag) {
+        const items = listContainer.querySelectorAll('.wb-item');
+        items.forEach(item => {
+            const itemTag = item.dataset.tag || '默认';
+            if (tag === '全部' || itemTag === tag) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // ===========================
+    // ★ 新建标签 弹窗逻辑
+    // ===========================
+
+    if (btnNewTag) {
+        btnNewTag.addEventListener('click', () => {
+            inputTagName.value = '';
+            modalTag.classList.add('active');
+            inputTagName.focus();
+        });
+    }
+
+    if (btnCancelTag) btnCancelTag.addEventListener('click', () => modalTag.classList.remove('active'));
+
+    if (btnConfirmTag) {
+        btnConfirmTag.addEventListener('click', () => {
+            const newTag = inputTagName.value.trim();
+            if (newTag) {
+                const tags = getTags();
+                if (!tags.includes(newTag)) {
+                    tags.push(newTag);
+                    saveTags(tags);
+                    renderTagBar(); // 刷新顶部
+                }
+                modalTag.classList.remove('active');
+            }
+        });
+    }
+
+    // ===========================
+    // ★ 新建/编辑 世界书 弹窗逻辑
+    // ===========================
+
+    // 渲染弹窗里的标签选择器
+    function renderModalTags(selectedTag) {
+        const tags = getTags();
+        modalTagList.innerHTML = '';
+        currentSelectedTagInModal = selectedTag || '默认'; // 重置选中
+
+        tags.forEach(tag => {
+            const span = document.createElement('span');
+            span.className = `modal-tag-option ${tag === currentSelectedTagInModal ? 'active' : ''}`;
+            span.textContent = tag;
+            span.addEventListener('click', () => {
+                // 切换选中状态
+                modalTagList.querySelectorAll('.modal-tag-option').forEach(t => t.classList.remove('active'));
+                span.classList.add('active');
+                currentSelectedTagInModal = tag;
+            });
+            modalTagList.appendChild(span);
+        });
+    }
+
+    const openWbModal = (item = null) => {
+        currentEditingItem = item;
+        modalWb.classList.add('active');
+        
+        if (item) {
+            modalTitle.textContent = "编辑世界书";
+            inputWbName.value = item.querySelector('.wb-name').textContent;
+            // 获取当前条目的标签并选中
+            renderModalTags(item.dataset.tag);
+        } else {
+            modalTitle.textContent = "新建世界书";
+            inputWbName.value = '';
+            // 默认选中当前筛选的标签（如果不是全部），或者是默认
+            const defaultSelect = (currentFilterTag !== '全部') ? currentFilterTag : '默认';
+            renderModalTags(defaultSelect);
+        }
+        inputWbName.focus();
+    };
+
+    const closeWbModal = () => {
+        modalWb.classList.remove('active');
+        currentEditingItem = null;
+    };
+
+    if (btnNewWb) btnNewWb.addEventListener('click', () => openWbModal(null));
+    if (btnCancelWb) btnCancelWb.addEventListener('click', closeWbModal);
+
+    // 确认按钮逻辑 (新建 或 编辑)
+    if (btnConfirmWb) {
+        btnConfirmWb.addEventListener('click', () => {
+            const name = inputWbName.value.trim();
+            if (!name) return; 
+
+            if (currentEditingItem) {
+                // === 编辑逻辑 ===
+                const oldName = currentEditingItem.querySelector('.wb-name').textContent;
+                
+                // 更新 UI
+                currentEditingItem.querySelector('.wb-name').textContent = name;
+                currentEditingItem.dataset.tag = currentSelectedTagInModal; // 更新标签数据
+                
+                // 数据搬家 (如果改名了)
+                if (oldName !== name) {
+                    const oldData = localStorage.getItem('wb_data_' + oldName);
+                    if (oldData) {
+                        localStorage.setItem('wb_data_' + name, oldData);
+                        localStorage.removeItem('wb_data_' + oldName);
+                    }
+                }
+                saveWorldBooks();
+                // 编辑完可能因为标签变了而消失（如果当前筛选不是全部），这里选择刷新一下筛选
+                filterListByTag(currentFilterTag);
+
+            } else {
+                // === 新建逻辑 ===
+                addWorldBookItem(name, currentSelectedTagInModal);
+            }
+            closeWbModal();
+        });
+    }
+
+    // 添加列表项函数
+    function addWorldBookItem(name, tag = '默认', shouldSave = true) {
         const item = document.createElement('div');
         item.className = 'wb-item';
+        item.dataset.tag = tag; // ★ 把标签存在 DOM 上
+        
         item.innerHTML = `
             <span class="wb-name">${name}</span>
             <div class="wb-actions">
-                <button class="wb-action-btn btn-rename">重命名</button>
+                <button class="wb-action-btn btn-rename">编辑</button> <!-- 改成了编辑 -->
                 <button class="wb-action-btn btn-delete">删除</button>
             </div>
         `;
 
-        const btnRename = item.querySelector('.btn-rename');
-        btnRename.addEventListener('click', (e) => {
+        // 编辑按钮
+        const btnEdit = item.querySelector('.btn-rename');
+        btnEdit.addEventListener('click', (e) => {
             e.stopPropagation();
-            openModal(item);
+            openWbModal(item);
         });
 
+        // 删除按钮
         const btnDelete = item.querySelector('.btn-delete');
         btnDelete.addEventListener('click', (e) => {
             e.stopPropagation();
-            
-            // ★ 1. 拿到书名
             const nameToDelete = item.querySelector('.wb-name').textContent;
-            
-            // ★ 2. 删掉它的所有数据
-            localStorage.removeItem('wb_data_' + nameToDelete);
-            
-            // 3. 删掉列表项并保存
-            item.remove();
-            saveWorldBooks(); 
+            if(confirm(`确定要删除《${nameToDelete}》吗？`)) {
+                localStorage.removeItem('wb_data_' + nameToDelete);
+                item.remove();
+                saveWorldBooks();
+            }
         });
 
-        // 条目点击事件
+        // 点击进入
         item.addEventListener('click', () => {
-            // 1. 获取当前书名
             const name = item.querySelector('.wb-name').textContent;
-            currentBookName = name; // ★ 记住它！
-            
-            // 2. 修改标题
+            currentBookName = name;
             const titleEl = document.getElementById('wb-entry-title');
             if (titleEl) titleEl.textContent = name;
-            
-            // ★ 3. 进门前先清空列表，并加载这本书专属的内容
             document.getElementById('wb-entry-list').innerHTML = ''; 
             loadAllEntries(); 
-
-            // 4. 跳转页面
             switchPage('page-worldbook-entry');
         });
+
         listContainer.appendChild(item);
         
-        // ★ 如果是新建操作，就保存一次；如果是读取操作，就不保存（避免死循环）
         if (shouldSave) {
             saveWorldBooks();
+            // 新建后，如果当前筛选的标签不匹配，可能需要切换或者提示，这里简单处理：
+            // 如果是在“全部”或者当前标签下新建，能看到；否则会被过滤掉。
+            // 我们手动触发一次筛选刷新
+            filterListByTag(currentFilterTag);
         }
     }
 
-    // ★ 初始化时读取列表
+    // ★ 初始化
+    renderTagBar();
     loadWorldBooks();
 
     // --- 编辑页逻辑 ---

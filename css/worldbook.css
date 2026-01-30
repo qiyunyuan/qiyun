@@ -108,6 +108,89 @@
     color: #d87093;
 }
 
+/* --- 顶部操作栏 --- */
+.wb-toolbar {
+    display: flex;
+    justify-content: space-between; /* 左右贴边 */
+    padding: 15px 20px;
+    background-color: #fff; /*以此为界，上面是粉色标题栏，这里开始变白 */
+    gap: 15px;
+}
+
+/* 操作按钮 (新建标签/新建世界书) */
+.wb-tool-btn {
+    flex: 1; /* 两个按钮平分宽度 */
+    height: 44px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* 淡淡的阴影 */
+}
+
+/* 左边：新建标签 (浅灰风格，低调点) */
+.wb-tool-btn.left {
+    background-color: #f8f9fa;
+    color: #666;
+    border: 1px solid #eee;
+}
+
+/* 右边：新建世界书 (粉色风格，强调) */
+.wb-tool-btn.right {
+    background-color: #ffcce0;
+    color: #d87093;
+    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4); /* 粉色光晕 */
+}
+
+.wb-tool-btn:active {
+    transform: scale(0.97);
+}
+
+.wb-tool-btn .icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* --- 标签栏 --- */
+.wb-tag-bar {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px 15px 20px; /* 上面贴着操作栏，下面留空 */
+    overflow-x: auto;
+    background-color: #fff;
+    scrollbar-width: none;
+}
+
+.wb-tag-bar::-webkit-scrollbar {
+    display: none;
+}
+
+/* 标签样式 (胶囊) */
+.wb-tag {
+    flex-shrink: 0;
+    padding: 6px 18px;
+    background-color: #f0f2f5;
+    border-radius: 20px;
+    color: #888;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* 选中状态 */
+.wb-tag.active {
+    background-color: #ffcce0;
+    color: #d87093;
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
+}
+
 /* ============================
    新建弹窗样式
    ============================ */
@@ -388,4 +471,107 @@
 .btn-del-entry {
     background-color: #f5f5f5;
     color: #aaa;
+}
+/* ============================
+   标签栏样式 (新加的)
+   ============================ */
+/* 2. 标签栏容器 */
+.wb-tag-bar {
+    display: flex;
+    gap: 10px;
+    padding: 5px 20px 15px 20px; /* 下方留点空隙给阴影 */
+    overflow-x: auto; /* 允许横向滑动 */
+    scrollbar-width: none; /* 隐藏滚动条(Firefox) */
+    -webkit-overflow-scrolling: touch; /* 丝滑滚动 */
+}
+
+/* 隐藏滚动条(Chrome/Safari) */
+.wb-tag-bar::-webkit-scrollbar {
+    display: none;
+}
+
+/* 3. 单个标签样式 */
+.wb-tag {
+    flex-shrink: 0; /* 防止标签被挤压 */
+    padding: 6px 16px;
+    background-color: #fff;
+    border: 2px solid #eee;
+    border-radius: 20px;
+    color: #888;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* 激活状态的标签（粉色高亮） */
+.wb-tag.active {
+    background-color: #ffcce0;
+    border-color: #ffb7c5;
+    color: #d87093;
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.4);
+}
+
+/* === 新增：弹窗里的标签选择器 === */
+.modal-section-title {
+    font-size: 14px;
+    color: #888;
+    margin: 10px 0 5px 0;
+    text-align: left;
+    width: 100%;
+    padding-left: 5px;
+}
+
+.modal-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.modal-tag-option {
+    padding: 4px 12px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.modal-tag-option.active {
+    background-color: #ffd9e8; /* 选中变粉 */
+    color: #e17499;
+    border-color: #ffcce0;
+    font-weight: bold;
+}
+
+/* 调整一下弹窗输入框的间距 */
+.modal-input {
+    margin-bottom: 10px;
+}
+
+/* 标签上的删除小叉叉 */
+.tag-del-btn {
+    margin-left: 5px;
+    font-size: 14px;
+    opacity: 0.5;
+    cursor: pointer;
+    padding: 0 4px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.tag-del-btn:hover {
+    opacity: 1;
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff4d4f;
+}
+
+/* 激活状态下的叉叉颜色 */
+.wb-tag.active .tag-del-btn {
+    color: #fff;
+    opacity: 0.8;
 }
