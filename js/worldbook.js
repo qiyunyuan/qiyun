@@ -479,6 +479,7 @@ export function initWorldBook() {
                 switchBtn.addEventListener('click', (e) => {
                     e.stopPropagation(); 
                     switchBtn.classList.toggle('active');
+                    item.classList.toggle('active'); 
                     saveAllEntries(); 
                 });
 
@@ -543,6 +544,8 @@ export function initWorldBook() {
         const dotClass = isKeyword ? 'status-dot type-keyword' : 'status-dot';
         const switchClass = data.isActive ? 'capsule-switch active' : 'capsule-switch';
 
+        if (data.isActive) item.classList.add('active');
+
         item.innerHTML = `
             <div class="entry-left">
                 <div class="${switchClass}"></div>
@@ -559,6 +562,7 @@ export function initWorldBook() {
         switchBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             switchBtn.classList.toggle('active');
+            item.classList.toggle('active'); 
             saveAllEntries(); 
         });
 

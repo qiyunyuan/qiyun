@@ -375,6 +375,16 @@
     align-items: center;
     gap: 12px;
     box-shadow: 0 4px 10px rgba(255, 182, 193, 0.15);
+    transition: all 0.3s ease;
+}
+
+.entry-item.active {
+    /* 激活时的背景色，选了个暖暖的樱花粉 */
+    background-color: #fff0f5; 
+    /* 边框也可以跟着变深一点点，更有质感 */
+    border-color: #ffb6c1;
+    /* 稍微加深一点阴影 */
+    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.5);
 }
 
 /* 左侧区域：开关 + 灯 + 标题 */
