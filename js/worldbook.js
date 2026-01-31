@@ -22,7 +22,7 @@ export function initWorldBook() {
 
     // 2. 弹窗与列表逻辑
     const btnNewWb = document.getElementById('btn-new-wb');
-    const btnNewTag = document.getElementById('btn-new-tag'); // 新增
+    const btnNewTag = document.getElementById('btn-new-tag'); 
     
     // 世界书弹窗元素
     const modalWb = document.getElementById('modal-new-wb');
@@ -41,9 +41,9 @@ export function initWorldBook() {
     const tagBarContainer = document.getElementById('wb-tag-bar'); // 顶部的标签栏
     const modalTitle = modalWb.querySelector('.modal-title');
 
-    let currentEditingItem = null; // 当前正在编辑的世界书 DOM
-    let currentSelectedTagInModal = '默认'; // 弹窗里选中的标签
-    let currentFilterTag = '全部'; // 顶部当前筛选的标签
+    let currentEditingItem = null; 
+    let currentSelectedTagInModal = '默认'; 
+    let currentFilterTag = '默认'; 
 
     // ===========================
     // ★ 核心数据操作
@@ -95,17 +95,14 @@ export function initWorldBook() {
     // ===========================
     // ★ 标签栏逻辑 (顶部)
     // ===========================
-    
+        
     // ===========================
-    // ★ 标签栏逻辑 (顶部) - 已更新删除功能
+    // ★ 标签栏逻辑 (顶部) - 去除“全部”，只留“默认”和自定义
     // ===========================
     
     function renderTagBar() {
-        // 获取最新标签列表
-        const customTags = getTags(); 
-        // 组合显示：全部 + (默认+自定义)
-        // 注意：这里为了逻辑简单，我们把'默认'也视为普通标签渲染，但'全部'是特殊的
-        const displayTags = ['全部', ...customTags];
+        // 直接获取标签列表（里面已经包含'默认'了）
+        const displayTags = getTags(); 
         
         tagBarContainer.innerHTML = '';
         
@@ -113,27 +110,25 @@ export function initWorldBook() {
             const div = document.createElement('div');
             div.className = `wb-tag ${tag === currentFilterTag ? 'active' : ''}`;
             
-            // 标签名文本
             const spanName = document.createElement('span');
             spanName.textContent = tag;
             div.appendChild(spanName);
 
-            // ★ 只有不是“全部”且不是“默认”的标签，才显示删除按钮
-            if (tag !== '全部' && tag !== '默认') {
+            // ★ 只有不是“默认”的标签，才显示删除按钮
+            if (tag !== '默认') {
                 const btnDel = document.createElement('span');
                 btnDel.className = 'tag-del-btn';
                 btnDel.textContent = '×';
                 
-                // 删除事件
                 btnDel.addEventListener('click', (e) => {
-                    e.stopPropagation(); // 防止触发标签切换
+                    e.stopPropagation(); 
                     
                     if (confirm(`确定要删除标签【${tag}】吗？\n该标签下的世界书将移动到“默认”标签。`)) {
-                        // 1. 从标签列表中移除
-                        const newTags = customTags.filter(t => t !== tag);
+                        // 1. 移除标签
+                        const newTags = displayTags.filter(t => t !== tag);
                         saveTags(newTags);
 
-                        // 2. 把该标签下的书移动到 '默认'
+                        // 2. 迁移数据到 '默认'
                         const items = listContainer.querySelectorAll('.wb-item');
                         let hasChange = false;
                         items.forEach(item => {
@@ -143,16 +138,13 @@ export function initWorldBook() {
                             }
                         });
                         
-                        if (hasChange) {
-                            saveWorldBooks(); // 保存书籍变更
-                        }
+                        if (hasChange) saveWorldBooks();
 
-                        // 3. 如果当前正看着这个标签，就切回“全部”
+                        // 3. 如果删的是当前看的，切回 '默认'
                         if (currentFilterTag === tag) {
-                            currentFilterTag = '全部';
+                            currentFilterTag = '默认';
                         }
 
-                        // 4. 刷新界面
                         renderTagBar();
                         filterListByTag(currentFilterTag);
                     }
@@ -160,7 +152,6 @@ export function initWorldBook() {
                 div.appendChild(btnDel);
             }
 
-            // 点击标签切换筛选
             div.addEventListener('click', () => {
                 document.querySelectorAll('.wb-tag').forEach(t => t.classList.remove('active'));
                 div.classList.add('active');
@@ -478,8 +469,8 @@ export function initWorldBook() {
                         <div class="entry-title">${title}</div>
                     </div>
                     <div class="entry-actions">
-                        <button class="entry-btn btn-edit-entry">编辑</button>
-                        <button class="entry-btn btn-del-entry">删除</button>
+                        <!-- 编辑按钮去掉了 -->
+                        <button class="entry-btn btn-del-entry" title="删除">🗑️</button>
                     </div>
                 `;
 
@@ -488,18 +479,22 @@ export function initWorldBook() {
                 switchBtn.addEventListener('click', (e) => {
                     e.stopPropagation(); 
                     switchBtn.classList.toggle('active');
-                    saveAllEntries(); // ★ 开关也要保存
+                    saveAllEntries(); 
                 });
 
+                // 删除按钮
                 item.querySelector('.btn-del-entry').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    item.remove();
-                    saveAllEntries(); // ★ 删除也要保存
+                    e.stopPropagation(); // 防止触发点击条目
+                    if(confirm('确定要删除这个条目吗？')) { // 加个确认更安全
+                        item.remove();
+                        saveAllEntries();
+                        checkEmpty();
+                    }
                 });
 
-                item.querySelector('.btn-edit-entry').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    
+                // ★ 点击整个条目进入编辑
+                item.addEventListener('click', () => {
+                    // 回填数据
                     document.getElementById('wb-input-title').value = item.querySelector('.entry-title').textContent;
                     document.getElementById('wb-input-keys').value = item.dataset.keys || '';
                     document.getElementById('wb-input-content').value = item.dataset.content || '';
@@ -516,6 +511,9 @@ export function initWorldBook() {
                 });
 
                 if (entryListContainer) entryListContainer.appendChild(item);
+
+                checkEmpty();
+
             }
 
             // ★★★ 重点在这里！这一句必须在花括号里面！ ★★★
@@ -552,27 +550,30 @@ export function initWorldBook() {
                 <div class="entry-title">${data.title}</div>
             </div>
             <div class="entry-actions">
-                <button class="entry-btn btn-edit-entry">编辑</button>
-                <button class="entry-btn btn-del-entry">删除</button>
+                <button class="entry-btn btn-del-entry" title="删除">🗑️</button>
             </div>
         `;
 
-        // 重新绑定事件（和之前一样）
+        // 重新绑定事件
         const switchBtn = item.querySelector('.capsule-switch');
         switchBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             switchBtn.classList.toggle('active');
-            saveAllEntries(); // ★ 开关也要保存
+            saveAllEntries(); 
         });
+
 
         item.querySelector('.btn-del-entry').addEventListener('click', (e) => {
             e.stopPropagation();
-            item.remove();
-            saveAllEntries(); // ★ 删除也要保存
+            if(confirm('确定要删除这个条目吗？')) {
+                item.remove();
+                saveAllEntries(); 
+                checkEmpty();
+            }
         });
 
-        item.querySelector('.btn-edit-entry').addEventListener('click', (e) => {
-            e.stopPropagation();
+        // ★ 点击整个条目进入编辑
+        item.addEventListener('click', () => {
             // 回填数据逻辑...
             document.getElementById('wb-input-title').value = item.querySelector('.entry-title').textContent;
             document.getElementById('wb-input-keys').value = item.dataset.keys || '';
@@ -636,6 +637,24 @@ export function initWorldBook() {
                 renderEntryElement(data);
             });
         }
+
+        checkEmpty();
+
     }
+
+    // ★ 检查列表是不是空的
+function checkEmpty() {
+    const list = document.getElementById('wb-entry-list');
+    const tip = document.getElementById('empty-tip');
+    
+    if (!list || !tip) return; // 安全检查
+
+    if (list.children.length > 0) {
+        tip.style.display = 'none'; // 有东西，隐藏提示
+    } else {
+        tip.style.display = 'block'; // 没东西，显示提示
+    }
+}
+
 
 }
