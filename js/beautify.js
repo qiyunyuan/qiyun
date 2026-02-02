@@ -11,7 +11,7 @@ const DEFAULT_CONFIG = {
     wallpaper: '', // 背景壁纸
     sliders: ['', '', ''], // 3张轮播图
     apps: [ // 6个APP图标和名称
-        { name: '世界', icon: '' },
+        { name: '世界观', icon: '' },
         { name: '面具', icon: '' },
         { name: '世界书', icon: '' },
         { name: '正则', icon: '' },

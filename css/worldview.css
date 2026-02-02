@@ -1,0 +1,349 @@
+/* css/worldview.css */
+
+/* 头部右侧加号按钮 */
+.header-action-btn {
+    position: absolute;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--primary-color, #ff6b81);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* 通用与列表区域 */
+.worldview-general-section,
+.worldview-list-section {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.section-title {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.tip-text {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.full-width-select,
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px; /* 更圆润一点 */
+    background: #f9f9f9;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.full-width-select:focus,
+input[type="text"]:focus,
+textarea:focus {
+    border-color: var(--primary-color, #ff6b81);
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(255, 107, 129, 0.1);
+}
+
+/* css/worldview.css */
+
+/* ... 之前的样式 (header, section-title 等) 保持不变 ... */
+
+/* === 新版标签输入框样式 === */
+
+/* 1. 外层容器：白色、圆润、干净 */
+.tags-input-container {
+    width: 100%;
+    min-height: 54px; /* 稍微高一点，不显拥挤 */
+    padding: 8px 12px;
+    border: 2px solid #f2f2f2; /* 极淡的灰色边框 */
+    border-radius: 16px;
+    background: #fff;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+/* 鼠标悬停或聚焦时的效果 */
+.tags-input-container:hover,
+.tags-input-container:focus-within {
+    border-color: #ffdae0; /* 变成淡粉色边框 */
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(255, 107, 129, 0.05); /* 加一点点阴影 */
+}
+
+/* 2. 标签列表区域：占据左侧所有空间，自动换行 */
+.tags-list {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* 标签之间的间距 */
+}
+
+/* 3. 单个标签 (Chip)：精致小巧 */
+.tag-chip {
+    background: #fff5f7; /* 极淡的粉色背景 */
+    color: #ff6b81;       /* 主题色文字 */
+    padding: 5px 12px;
+    border-radius: 20px;  /* 胶囊形状 */
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #ffe0e6; /* 细细的粉色边框 */
+    transition: all 0.2s;
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(255, 107, 129, 0.05);
+}
+
+.tag-chip:hover {
+    background: #ffe4e8;
+    transform: translateY(-1px); /* 微微上浮 */
+}
+
+/* 标签上的删除叉号 */
+.tag-remove {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 107, 129, 0.1); /* 半透明红底 */
+    font-size: 12px;
+    line-height: 1;
+    color: #ff6b81;
+    transition: all 0.2s;
+}
+
+.tag-remove:hover {
+    background: #ff6b81;
+    color: white;
+}
+
+/* 4. 添加按钮 (+)：固定在右侧 */
+.btn-add-tag {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0; /* 防止被挤扁 */
+    border-radius: 50%;
+    background: #f9f9f9;
+    border: 1px dashed #ccc; /* 虚线边框，更有“添加”的感觉 */
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.btn-add-tag:hover {
+    border-color: var(--primary-color, #ff6b81);
+    color: var(--primary-color, #ff6b81);
+    background: #fff5f7;
+    transform: rotate(90deg); /* 鼠标放上去转一圈，好玩 */
+}
+
+/* 5. 如果没有标签时的提示文字样式 (可选) */
+.tags-list:empty::before {
+    content: "点击右侧添加 →";
+    color: #ccc;
+    font-size: 13px;
+    padding-left: 4px;
+}
+
+/* 弹窗样式  */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none; /* 默认隐藏 */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    width: 85%;
+    max-width: 320px;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 70%;
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+}
+
+.modal-body {
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #eee;
+}
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    flex: 1;
+    cursor: pointer;
+}
+
+/* 弹窗里的选择列表 */
+.selector-item {
+    padding: 12px;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.selector-item:last-child {
+    border-bottom: none;
+}
+
+.selector-item.selected {
+    background-color: #fff0f3;
+}
+
+.selector-item .check-icon {
+    display: none;
+    color: var(--primary-color, #ff6b81);
+    font-weight: bold;
+}
+
+.selector-item.selected .check-icon {
+    display: block;
+}
+
+
+/* 如果没有世界书时的提示 */
+.no-books-tip {
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+}
+
+/* 列表项样式 */
+.worldview-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.worldview-item:active {
+    transform: scale(0.98);
+    background-color: #fafafa;
+}
+
+.worldview-item .item-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.worldview-item .item-desc {
+    font-size: 13px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 编辑页容器 */
+.edit-form {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 按钮组 - 垂直排列 */
+.button-group {
+    margin-top: auto; /* 把按钮顶到底部 */
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    gap: 15px;
+}
+
+.btn-primary, .btn-danger {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color, #ff6b81);
+    box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
+}
+
+.btn-danger {
+    background-color: #ff4757;
+    background-color: #fff; /* 删除按钮改成白色背景红字，防误触，也好看点 */
+    color: #ff4757;
+    border: 1px solid #ff4757;
+}
+
+.btn-primary:active, .btn-danger:active {
+    opacity: 0.8;
+}

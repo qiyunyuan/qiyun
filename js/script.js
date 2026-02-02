@@ -4,6 +4,7 @@ import { initBeautify } from './beautify.js';
 import { initPreset } from './preset.js';
 import { initMask } from './mask.js'; 
 import { initWorldBook } from './worldbook.js';
+import { initWorldview } from './worldview.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化 API 模块
@@ -20,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初始化世界书模块
     initWorldBook();
+
+    // 初始化世界观模块
+    initWorldview();
 
     // --- 通用路由逻辑 ---
 
