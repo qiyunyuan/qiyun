@@ -2,812 +2,96 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no"
-    >
-    <meta name="application-name" content="祁韵喵喵机">
-    <title>祁韵喵喵机</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="application-name" content="情侣机">
+    <title>情侣机</title>
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#fcebf3">
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/system-ui.css">    
+    <link rel="stylesheet" href="css/desktop.css">
+
+    <!-- 图标库 -->
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
+
 </head>
-
 <body>
-
-<div class="container">
-    <!-- 主页内容 -->
-    <div id="page-home" class="page active">
-        <!-- 2. 个人资料区域 -->
-        <div class="profile-section">
-            <div class="avatar"></div>
-            <div class="nickname">祁韵</div>
-            <div class="bio">我想要暖暖的幸福</div>
-        </div>
-
-        <!-- 3. 进入世界按键 -->
-        <button class="enter-world-btn">进入世界</button>
-
-        <!-- 底部区域 -->
-        <div class="bottom-area">
-            <!-- 图片轮播区域 -->
-            <div class="image-slider">
-                <!-- 占位图项 -->
-                <div class="slider-item" style="background-color:#e0e0e0;"></div>
-                <div class="slider-item" style="background-color:#d0d0d0;"></div>
-                <div class="slider-item" style="background-color:#c0c0c0;"></div>
-            </div>
-
-            <!-- 软件图标区域 (6个) -->
-            <div class="apps-grid">
-                <div class="app-item" id="btn-open-worldview">
-                    <div class="app-icon"></div>
-                    <div class="app-name">世界观</div>
-                </div>
-                <div class="app-item" id="btn-open-masks">
-                    <div class="app-icon"></div>
-                    <div class="app-name">面具</div>
-                </div>
-                <div class="app-item" id="btn-open-worldbook">
-                    <div class="app-icon"></div>
-                    <div class="app-name">世界书</div>
-                </div>
-                <div class="app-item">
-                    <div class="app-icon"></div>
-                    <div class="app-name">正则</div>
-                </div>
-                <div class="app-item" id="btn-settings">
-                    <div class="app-icon"></div>
-                    <div class="app-name">设置</div>
-                </div>
-                <div class="app-item" id="btn-open-preset">
-                    <div class="app-icon"></div>
-                    <div class="app-name">预设</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 设置页面 -->
-    <div id="page-settings" class="page">
-        <!-- 顶部标题栏 -->
-        <div class="app-header">
-            <div id="btn-back-home" class="back-btn">‹</div>
-            <div class="title">设置</div>
-        </div>
-        <!-- 内容区域 -->
-        <div class="app-content">
-            <div class="settings-list">
-                <div class="settings-item" id="btn-open-api">
-                    <div class="settings-item-text">API 设置</div>
-                    <div class="settings-arrow">›</div>
-                </div>
-                <div class="settings-item">
-                    <div class="settings-item-text">主题设置</div>
-                    <div class="settings-arrow">›</div>
-                </div>
-                <div class="settings-item" id="btn-open-beautify">
-                    <div class="settings-item-text">美化设置</div>
-                    <div class="settings-arrow">›</div>
-                </div>
-                <div class="settings-item">
-                    <div class="settings-item-text">数据管理</div>
-                    <div class="settings-arrow">›</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 美化设置页面 -->
-    <div id="page-beautify-settings" class="page">
-        <!-- 顶部标题栏 -->
-        <div class="app-header">
-            <div id="btn-back-beautify" class="back-btn">‹</div>
-            <div class="title">美化设置</div>
-        </div>
-        <!-- 内容区域 -->
-        <div class="app-content beautify-container">
+    <!-- 手机外壳容器 -->
+    <div id="phone-container">
+        <!-- 桌面主屏幕 -->
+        <div id="desktop">
             
-            <!-- 1. 个人资料设置 -->
-            <div class="beautify-group-title">个人资料</div>
-            <div class="beautify-card">
-                <div class="form-item center-align">
-                    <div class="image-preview-wrapper">
-                        <div class="image-preview large-preview" id="preview-avatar"></div>
-                    </div>
-                    <div class="action-buttons-row">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-avatar">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-avatar">相册</div>
-                    </div>
-                    <!-- 隐藏的输入控件 -->
-                    <div class="url-input-container" id="container-url-avatar">
-                        <input type="text" class="form-input" id="url-avatar" placeholder="粘贴图片链接...">
-                    </div>
-                    <input type="file" id="file-avatar" class="hidden-file-input" accept="image/*">
-                </div>
+            <!-- 顶部：个人信息区 -->
+            <div class="profile-section">
+                <div class="avatar"></div>
+                <h1 class="username">OvO</h1>
+                <p class="motto">我想要暖暖的幸福</p>
+            </div>
 
-                <div class="form-item">
-                    <label class="form-label">昵称</label>
-                    <input type="text" id="input-nickname" class="form-input" placeholder="输入昵称">
-                </div>
-                <div class="form-item">
-                    <label class="form-label">个性签名</label>
-                    <input type="text" id="input-bio" class="form-input" placeholder="输入一句话简介">
+            <!-- 小组件：时间和问候 -->
+            <div class="widget time-widget">
+                <p class="quote">☆*爱 是唯一通向你的次元的钥匙*☆</p>
+                <div class="datetime">
+                    <span class="date">01/01 星期一</span>
+                    <span class="time">00:00:00</span>
                 </div>
             </div>
 
-            <!-- 2. 界面外观设置 -->
-            <div class="beautify-group-title">界面外观</div>
-            <div class="beautify-card">
-                <div class="form-item center-align">
-                    <label class="form-label" style="align-self: flex-start;">背景壁纸</label>
-                    <div class="image-preview-wrapper">
-                        <div class="image-preview rect-preview" id="preview-wallpaper"></div>
+            <!-- 中间部分：左侧小组件 + 右侧APP -->
+            <div class="middle-section">
+                <!-- 左侧：Kitten 小组件 -->
+                <div class="widget kitten-widget">
+                    <h2 class="kitten-title">♰.𝐾𝑖𝑡𝑡𝑒𝑛.♰</h2>
+                    <div class="kitten-item">
+                        <span class="dot"></span>
+                        <span class="text">愿你被世界所爱</span>
                     </div>
-                    <div class="action-buttons-row">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-wallpaper">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-wallpaper">相册</div>
+                    <div class="kitten-item">
+                        <span class="text">你就是我的全世界</span>
+                        <span class="dot"></span>
                     </div>
-                    <div class="url-input-container" id="container-url-wallpaper">
-                        <input type="text" class="form-input" id="url-wallpaper" placeholder="粘贴壁纸链接...">
+                </div>
+
+                <!-- 右侧：侧边APP -->
+                <div class="side-apps">
+                    <div class="app-icon" data-app="app1">
+                        <div class="icon-box"></div>
+                        <span class="app-name">APP1</span>
                     </div>
-                    <input type="file" id="file-wallpaper" class="hidden-file-input" accept="image/*">
+                    <div class="app-icon" data-app="app2">
+                        <div class="icon-box"></div>
+                        <span class="app-name">APP2</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- 3. 滑动图片设置 -->
-            <div class="beautify-group-title">滑动图片 (3张)</div>
-            <div class="beautify-card">
-                <!-- 图1 -->
-                <div class="slider-setting-item">
-                    <label class="form-label">图片 1</label>
-                    <div class="image-preview-wrapper">
-                        <div class="image-preview rect-preview" id="preview-slider-0"></div>
-                    </div>
-                    <div class="action-buttons-row">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-slider-0">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-slider-0">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-slider-0">
-                        <input type="text" class="form-input" id="url-slider-0" placeholder="粘贴图片链接...">
-                    </div>
-                    <input type="file" id="file-slider-0" class="hidden-file-input" accept="image/*">
+            <!-- 底部：固定停靠栏 (Dock) -->
+            <div class="dock">
+                <div class="app-icon" data-app="app3">
+                    <div class="icon-box"></div>
+                    <span class="app-name">APP3</span>
                 </div>
-                <hr class="dashed-line">
-                <!-- 图2 -->
-                <div class="slider-setting-item">
-                    <label class="form-label">图片 2</label>
-                    <div class="image-preview-wrapper">
-                        <div class="image-preview rect-preview" id="preview-slider-1"></div>
-                    </div>
-                    <div class="action-buttons-row">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-slider-1">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-slider-1">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-slider-1">
-                        <input type="text" class="form-input" id="url-slider-1" placeholder="粘贴图片链接...">
-                    </div>
-                    <input type="file" id="file-slider-1" class="hidden-file-input" accept="image/*">
+                <div class="app-icon" data-app="app4">
+                    <div class="icon-box"></div>
+                    <span class="app-name">APP4</span>
                 </div>
-                <hr class="dashed-line">
-                <!-- 图3 -->
-                <div class="slider-setting-item">
-                    <label class="form-label">图片 3</label>
-                    <div class="image-preview-wrapper">
-                        <div class="image-preview rect-preview" id="preview-slider-2"></div>
-                    </div>
-                    <div class="action-buttons-row">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-slider-2">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-slider-2">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-slider-2">
-                        <input type="text" class="form-input" id="url-slider-2" placeholder="粘贴图片链接...">
-                    </div>
-                    <input type="file" id="file-slider-2" class="hidden-file-input" accept="image/*">
+                <div class="app-icon" data-app="app5">
+                    <div class="icon-box"></div>
+                    <span class="app-name">APP5</span>
                 </div>
-            </div>
-
-            <!-- 4. APP图标设置 -->
-            <div class="beautify-group-title">APP 图标与名称</div>
-            <div class="beautify-card app-icons-settings-grid">
-                <!-- 循环生成6个APP设置项 -->
-                <!-- 1 -->
-                <div class="app-setting-card">
-                    <div class="image-preview app-preview" id="preview-app-0"></div>
-                    <input type="text" id="input-app-name-0" class="form-input app-name-input" placeholder="名称">
-                    <div class="action-buttons-row small-btns">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-app-0">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-app-0">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-app-0">
-                        <input type="text" class="form-input" id="url-app-0" placeholder="链接...">
-                    </div>
-                    <input type="file" id="file-app-0" class="hidden-file-input" accept="image/*">
+                <div class="app-icon" data-app="app6">
+                    <div class="icon-box"></div>
+                    <span class="app-name">APP6</span>
                 </div>
-                <!-- 2 -->
-                <div class="app-setting-card">
-                    <div class="image-preview app-preview" id="preview-app-1"></div>
-                    <input type="text" id="input-app-name-1" class="form-input app-name-input" placeholder="名称">
-                    <div class="action-buttons-row small-btns">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-app-1">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-app-1">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-app-1">
-                        <input type="text" class="form-input" id="url-app-1" placeholder="链接...">
-                    </div>
-                    <input type="file" id="file-app-1" class="hidden-file-input" accept="image/*">
-                </div>
-                <!-- 3 -->
-                <div class="app-setting-card">
-                    <div class="image-preview app-preview" id="preview-app-2"></div>
-                    <input type="text" id="input-app-name-2" class="form-input app-name-input" placeholder="名称">
-                    <div class="action-buttons-row small-btns">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-app-2">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-app-2">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-app-2">
-                        <input type="text" class="form-input" id="url-app-2" placeholder="链接...">
-                    </div>
-                    <input type="file" id="file-app-2" class="hidden-file-input" accept="image/*">
-                </div>
-                <!-- 4 -->
-                <div class="app-setting-card">
-                    <div class="image-preview app-preview" id="preview-app-3"></div>
-                    <input type="text" id="input-app-name-3" class="form-input app-name-input" placeholder="名称">
-                    <div class="action-buttons-row small-btns">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-app-3">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-app-3">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-app-3">
-                        <input type="text" class="form-input" id="url-app-3" placeholder="链接...">
-                    </div>
-                    <input type="file" id="file-app-3" class="hidden-file-input" accept="image/*">
-                </div>
-                <!-- 5 -->
-                <div class="app-setting-card">
-                    <div class="image-preview app-preview" id="preview-app-4"></div>
-                    <input type="text" id="input-app-name-4" class="form-input app-name-input" placeholder="名称">
-                    <div class="action-buttons-row small-btns">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-app-4">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-app-4">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-app-4">
-                        <input type="text" class="form-input" id="url-app-4" placeholder="链接...">
-                    </div>
-                    <input type="file" id="file-app-4" class="hidden-file-input" accept="image/*">
-                </div>
-                <!-- 6 -->
-                <div class="app-setting-card">
-                    <div class="image-preview app-preview" id="preview-app-5"></div>
-                    <input type="text" id="input-app-name-5" class="form-input app-name-input" placeholder="名称">
-                    <div class="action-buttons-row small-btns">
-                        <div class="action-btn link-btn" data-type="link" data-target="url-app-5">链接</div>
-                        <div class="action-btn file-btn" data-type="file" data-target="file-app-5">相册</div>
-                    </div>
-                    <div class="url-input-container" id="container-url-app-5">
-                        <input type="text" class="form-input" id="url-app-5" placeholder="链接...">
-                    </div>
-                    <input type="file" id="file-app-5" class="hidden-file-input" accept="image/*">
-                </div>
-            </div>
-
-            <div class="save-action-area">
-                <button id="btn-save-beautify" class="btn-save-beautify">保存所有设置</button>
-                <br>
-                <button id="btn-reset-beautify" class="btn-reset">恢复默认</button>
             </div>
 
         </div>
+
+                <!-- APP 容器（默认隐藏） -->
+        <div id="app-container" class="hidden"></div>
     </div>
-
-    <!-- API 设置页面 -->
-    <div id="page-api-settings" class="page">
-        <!-- 顶部标题栏 -->
-        <div class="app-header">
-            <div id="btn-back-settings" class="back-btn">‹</div>
-            <div class="title">API设置</div>
-        </div>
-        <!-- 内容区域 -->
-        <div class="app-content">
-            <div class="api-settings-container">
-                <!-- API 地址 -->
-                <div class="api-group">
-                    <div class="api-label">API 地址</div>
-                    <input type="text" class="api-input" placeholder="请输入 API 地址">
-                </div>
-
-                <!-- API 密钥 -->
-                <div class="api-group">
-                    <div class="api-label">API 密钥</div>
-                    <input type="password" class="api-input" placeholder="请输入 API 密钥">
-                </div>
-
-                <!-- 模型 -->
-                <div class="api-group">
-                    <div class="api-label">模型</div>
-                    <div class="model-row">
-                        <div class="api-select" id="model-select-trigger">未选择模型</div>
-                        <button class="btn-fetch">拉取</button>
-                    </div>
-                </div>
-
-                <!-- 额度状态 -->
-                <div class="api-group">
-                    <div class="api-label">额度状态</div>
-                    <div class="quota-row">
-                        <div class="quota-btn active">有额度</div>
-                        <div class="quota-btn">无额度</div>
-                    </div>
-                </div>
-
-                <!-- 操作按钮 -->
-                <div class="action-row">
-                    <button class="btn-test">测试模型</button>
-                    <button class="btn-save">保存设置</button>
-                </div>
-            </div>
-
-            <!-- API 配置管理 -->
-            <div class="config-manage-container">
-                <div class="api-label" style="margin-bottom:10px;">API 配置管理</div>
-                <div class="config-row">
-                    <input type="text" class="api-input" id="config-name-input" placeholder="输入配置名称">
-                    <button class="btn-save-config">保存</button>
-                </div>
-
-                <!-- 已保存的配置列表区域 -->
-                <div class="saved-configs-header">
-                    <span class="saved-title">已保存的配置</span>
-                    <span class="btn-clear-all">清空全部</span>
-                </div>
-                
-                <div class="config-list" id="config-list">
-                    <div class="no-config">暂无配置</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 预设页面 -->
-    <div id="page-preset-settings" class="page">
-        <!-- 顶部标题栏 -->
-        <div class="app-header">
-            <div id="btn-back-preset" class="back-btn">‹</div>
-            <div class="title">预设</div>
-        </div>
-        <!-- 内容区域 -->
-        <div class="app-content preset-container">
-            
-            <!-- 1. 预设管理卡片 -->
-            <div class="preset-card">
-                <div class="preset-header-row" id="btn-switch-preset-group">
-                    <span id="current-preset-name">默认对话补全</span>
-                    <span class="preset-arrow">›</span>
-                </div>
-                <div class="preset-actions-row">
-                    <button id="btn-rename-preset" class="preset-btn">重命名</button>
-                    <button id="btn-save-preset" class="preset-btn">保存</button>
-                    <button id="btn-save-as-preset" class="preset-btn">另存</button>
-                    <button id="btn-delete-preset" class="preset-btn delete">删除</button>
-                </div>
-            </div>
-
-            <!-- 2. 参数设置卡片 -->
-            <div class="preset-card">
-                <!-- 上下文长度 -->
-                <div class="param-item">
-                    <div class="param-header">
-                        <label class="param-label">上下文长度</label>
-                        <span class="param-unit">tokens</span>
-                    </div>
-                    <div class="param-control">
-                        <input type="range" id="slider-context" class="slider" min="0" max="2000000" value="30000" step="10000">
-                        <input type="number" class="number-input" value="30000">
-                    </div>
-                </div>
-                
-                <hr class="dashed-line" style="margin: 15px 0; border:none; border-top:1px dashed #eee;">
-
-                <!-- 最大回复长度 -->
-                <div class="param-item">
-                    <div class="param-header">
-                        <label class="param-label">最大回复长度</label>
-                        <span class="param-unit">tokens</span>
-                    </div>
-                    <div class="param-control">
-                        <input type="range" id="slider-reply" class="slider" min="0" max="128000" value="64000" step="1000">
-                        <input type="number" class="number-input" value="64000">
-                    </div>
-                </div>
-
-                <hr class="dashed-line" style="margin: 15px 0; border:none; border-top:1px dashed #eee;">
-
-                <!-- 温度 -->
-                <div class="param-item">
-                    <div class="param-header">
-                        <label class="param-label">温度</label>
-                        <span class="param-unit">Temperature</span>
-                    </div>
-                    <div class="param-control">
-                        <input type="range" id="slider-temp" class="slider" min="0" max="2" value="0.7" step="0.1">
-                        <input type="number" class="number-input" value="0.7">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. 提示词卡片 -->
-            <div class="preset-card">
-                <div class="prompt-header">
-                    <label class="param-label">提示词</label>
-                    <button class="btn-new-prompt">新建</button>
-                </div>
-
-                <!-- 【新增】在这里添加列表容器 -->
-                <div id="prompt-list-container" class="prompt-list">
-                    <!-- JS 会自动往这里填充内容 -->
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- 模型选择弹窗 -->
-    <div id="modal-model-select" class="modal-overlay">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-title">选择模型</div>
-                <div class="modal-close-btn" id="btn-close-modal">×</div>
-            </div>
-            <div class="modal-content">
-                <div class="modal-tabs">
-                    <div class="tab-btn active">全部</div>
-                    <div class="tab-btn">常用</div>
-                </div>
-                <!-- 模型列表区域 (暂时留空) -->
-                <div class="model-list"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 提示词编辑页面 -->
-    <div id="page-prompt-edit" class="page">
-        <!-- 顶部标题栏 -->
-        <div class="app-header">
-            <div id="btn-back-prompt-edit" class="back-btn">‹</div>
-            <div class="title">提示词</div>
-            <div id="btn-save-prompt" class="header-right-btn">保存</div>
-        </div>
-        <!-- 内容区域 -->
-        <div class="app-content preset-edit-container">
-            <div class="edit-group">
-                <label class="edit-label">名称</label>
-                <input type="text" id="edit-prompt-name" class="edit-input" placeholder="提示词名称">
-            </div>
-            <div class="edit-group">
-                <label class="edit-label">内容</label>
-                <textarea id="edit-prompt-content" class="edit-textarea" placeholder="输入提示词内容..."></textarea>
-            </div>
-        </div>
-    </div> <!-- 👈 关键点：这里加了一个闭合标签，把提示词页面先关上 -->
-
-    <!-- 预设分组列表页面 (现在它自由啦，是独立的页面了) -->
-    <div id="page-preset-groups" class="page">
-        <!-- 顶部标题栏 -->
-        <div class="app-header">
-            <div id="btn-back-preset-groups" class="back-btn">‹</div>
-            <div class="title">预设分组</div>
-        </div>
-        <!-- 内容区域 -->
-        <div class="app-content" style="background-color: #fff;">
-            <!-- 列表容器 -->
-            <div id="preset-group-list" class="group-list">
-                <!-- JS 会在这里生成列表项 -->
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= 面具列表页面 ================= -->
-<div id="page-masks" class="page">
-    <div class="app-header">
-        <div id="btn-back-home-from-masks" class="back-btn">‹</div>
-        <div class="title">面具</div>
-        <!-- 右上角新建按钮 -->
-        <div id="btn-new-mask" class="header-right-btn">新建</div>
-    </div>
-    <div class="app-content">
-        <!-- 面具列表容器 -->
-        <div class="mask-list">
-            <!-- 示例面具项 (之后可以用JS生成) -->
-            <div class="mask-item" id="mask-demo-1">
-                <div class="mask-avatar-preview"></div>
-                <div class="mask-info">
-                    <div class="mask-remark">示例备注</div>
-                    <div class="mask-name">示例名称</div>
-                </div>
-                <div class="mask-arrow">›</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ================= 编辑面具页面 ================= -->
-<div id="page-mask-edit" class="page">
-    <div class="app-header">
-        <div id="btn-back-masks" class="back-btn">‹</div>
-        <div class="title">编辑面具</div>
-        <div id="btn-save-mask" class="header-right-btn">保存</div>
-    </div>
-    <div class="app-content mask-edit-content">
-        <!-- 头像区域 -->
-        <div class="edit-avatar-section">
-            <!-- 隐藏的文件上传控件 -->
-            <input type="file" id="mask-avatar-input" accept="image/*" style="display: none;">
-            
-            <div class="edit-avatar-circle" id="mask-avatar-wrapper">
-                <span>头像</span>
-            </div>
-        </div>
-        
-        <!-- 输入表单 -->
-        <div class="mask-form">
-            <div class="form-group">
-                <label>备注</label>
-                <input type="text" id="mask-remark-input" class="mask-input" placeholder="输入备注信息">
-            </div>
-            <div class="form-group">
-                <label>名称</label>
-                <input type="text" id="mask-name-input" class="mask-input" placeholder="输入角色名称">
-            </div>
-            <div class="form-group">
-                <label>描述</label>
-                <textarea id="mask-desc-input" class="mask-textarea" placeholder="描述（生日、性别、背景、外貌、性格等等）"></textarea>
-            </div>
-        </div>
-
-        <!-- 删除按钮 -->
-        <button id="btn-delete-mask-action" class="btn-delete-mask">删除</button>
-    </div>
-</div>
-
-    <!-- 全局世界书列表页 -->
-    <div id="page-worldbook" class="page">
-        <div class="app-header">
-            <div id="btn-back-worldbook" class="back-btn">‹</div>
-            <div class="title">世界书</div>
-           
-        </div>
-        
-        <!-- 3. 内容区域-->
-        <div class="app-content">
-
-            <!-- 新增：操作栏 (粉色背景延伸下来一点点) -->
-            <div class="wb-toolbar">
-                <button id="btn-new-tag" class="wb-tool-btn left">
-                    <span class="icon">+</span> 标签
-                </button>
-                <button id="btn-new-wb" class="wb-tool-btn right">
-                    <span class="icon">+</span> 世界书
-                </button>
-            </div>
-
-            <!-- 新增：标签栏 (独立一行) -->
-            <div id="wb-tag-bar" class="wb-tag-bar">
-                <div class="wb-tag active">全部</div>
-                <!-- JS 会在这里插入标签 -->
-            </div>
-
-            <!-- 列表容器 -->
-            <div id="wb-list" class="wb-list">
-                <!-- 这是一个示例条目，JS会自动生成类似的 -->
-                <!-- <div class="wb-item">
-                    <span class="wb-name">示例世界书</span>
-                    <span class="wb-arrow">›</span>
-                </div> -->
-            </div>
-        </div>
-
-        <!-- 新建世界书的弹窗 (默认隐藏) -->
-        <div id="modal-new-wb" class="modal-overlay">
-            <div class="modal-box">
-                <div class="modal-title">新建世界书</div>
-                <input type="text" id="input-wb-name" class="modal-input" placeholder="给它起个名字吧...">
-                <!-- 选择标签 -->
-                <div class="modal-section-title">选择标签</div>
-                <div id="modal-tag-list" class="modal-tags-container">
-                    <!-- JS 会在这里生成可点击的标签丸子 -->
-                </div>
-                <div class="modal-btns">
-                    <button id="btn-cancel-wb" class="modal-btn cancel">取消</button>
-                    <button id="btn-confirm-wb" class="modal-btn confirm">确定</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 新建标签的弹窗 -->
-        <div id="modal-new-tag" class="modal-overlay">
-            <div class="modal-box">
-                <div class="modal-title">新建标签</div>
-                <input type="text" id="input-tag-name" class="modal-input" placeholder="输入标签名...">
-                <div class="modal-btns">
-                    <button id="btn-cancel-tag" class="modal-btn cancel">取消</button>
-                    <button id="btn-confirm-tag" class="modal-btn confirm">确定</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 世界书条目详情页 -->
-    <div id="page-worldbook-entry" class="page">
-        <div class="app-header">
-            <div id="btn-back-wb-entry" class="back-btn">‹</div>
-            <div class="title" id="wb-entry-title">条目名称</div>
-            <div id="btn-new-entry-content" class="header-right-btn">新建</div>
-        </div>
-        <div class="app-content">
-            <div id="wb-entry-list"><!-- 这里以后放具体内容列表 --></div>
-            <div id="empty-tip" style="padding: 20px; color: #999; text-align: center;">暂无内容</div>
-        </div>
-    </div>
-
-    <!-- 世界书条目编辑页面 -->
-    <div id="page-worldbook-edit" class="page">
-        <div class="app-header">
-            <div id="btn-back-wb-edit" class="back-btn">‹</div>
-            <div class="title">条目</div>
-            <div id="btn-save-wb" class="header-right-btn">保存</div>
-        </div>
-        <div class="app-content wb-edit-content">
-            <!-- 标题 -->
-            <div class="wb-form-group">
-                <label>标题</label>
-                <input type="text" id="wb-input-title" class="wb-input" placeholder="输入条目标题">
-            </div>
-
-            <!-- 条目状态 -->
-            <div class="wb-form-group">
-                <label>条目状态</label>
-                <select id="wb-select-status" class="wb-select">
-                    <option value="permanent">🔵 蓝灯 (永久开启)</option>
-                    <option value="keyword">🟢 绿灯 (关键词触发)</option>
-                </select>
-            </div>
-
-            <!-- 关键词 -->
-            <div class="wb-form-group">
-                <label>关键词</label>
-                <input type="text" id="wb-input-keys" class="wb-input" placeholder="多关键词用逗号隔开">
-            </div>
-
-            <!-- 触发策略 -->
-            <div class="wb-form-group">
-                <label>触发策略 / 插入位置</label>
-                <select id="wb-select-strategy" class="wb-select">
-                    <option value="before_char">角色定义之前</option>
-                    <option value="after_char">角色定义之后</option>
-                    <option value="depth">系统在深度 D 处</option>
-                </select>
-            </div>
-
-            <!-- 深度 (默认隐藏) -->
-            <div class="wb-form-group" id="group-wb-depth" style="display: none;">
-                <label>插入深度</label>
-                <input type="number" id="wb-input-depth" class="wb-input" value="4">
-            </div>
-
-            <!-- 顺序 & 概率 (一行两个) -->
-            <div class="wb-form-row">
-                <div class="wb-form-group half">
-                    <label>顺序</label>
-                    <input type="number" id="wb-input-order" class="wb-input" value="100">
-                </div>
-                <div class="wb-form-group half">
-                    <label>触发概率 (%)</label>
-                    <input type="number" id="wb-input-prob" class="wb-input" value="100">
-                </div>
-            </div>
-
-            <!-- 内容 -->
-            <div class="wb-form-group">
-                <div class="label-row">
-                    <label>内容</label>
-                    <span class="token-count">词符: <span id="wb-token-num">0</span></span>
-                </div>
-                <textarea id="wb-input-content" class="wb-textarea" placeholder="输入世界书内容..."></textarea>
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= 世界观页面 ================= -->
-<!-- 世界观列表页 -->
-<div id="page-worldview" class="page">
-    <div class="app-header">
-        <div id="btn-back-from-worldview" class="back-btn">‹</div>
-        <div class="title">世界观</div>
-        <div id="btn-new-worldview" class="header-action-btn">+</div>
-    </div>
-    <div class="app-content">
-        <!-- 通用设置区域 -->
-<div class="worldview-general-section">
-    <div class="section-title">通用</div>
-    <div class="form-group">
-        <label>全局世界书</label>
-        <!-- 新结构：标签显示框 -->
-        <div class="tags-input-container" id="box-general-books">
-            <div class="tags-list" id="display-general-books">
-                <!-- JS 会在这里填入已选的标签 -->
-            </div>
-            <div class="btn-add-tag" id="btn-add-general-book">+</div>
-        </div>
-        <div class="tip-text">选择所有世界观都适用的世界书</div>
-    </div>
-</div>
-        <!-- 世界观列表区域 -->
-        <div class="worldview-list-section">
-            <div class="section-title">我的世界观</div>
-            <div id="worldview-list" class="list-container">
-                <!-- JS 生成 -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 创建/编辑世界观页 -->
-<div id="page-worldview-create" class="page">
-    <div class="app-header">
-        <div id="btn-back-from-create-worldview" class="back-btn">‹</div>
-        <div class="title">创建世界观</div>
-    </div>
-    <div class="app-content">
-        <div class="edit-form">
-            <div class="form-group">
-                <label>名称</label>
-                <input type="text" id="input-worldview-name" placeholder="输入世界观名字">
-            </div>
-            
-            <div class="form-group">
-                <label>描述</label>
-                <textarea id="input-worldview-desc" rows="20" placeholder="简要描述这个世界..."></textarea>
-            </div>
-
-<div class="form-group">
-    <label>绑定世界书</label>
-    <!-- 新结构：标签显示框 -->
-    <div class="tags-input-container" id="box-worldview-books">
-        <div class="tags-list" id="display-worldview-books">
-            <!-- JS 会在这里填入已选的标签 -->
-        </div>
-        <div class="btn-add-tag" id="btn-add-worldview-book">+</div>
-    </div>
-</div>
-            <!-- 按钮组：保存上面，删除下面 -->
-            <div class="button-group">
-                <button id="btn-save-worldview" class="btn-primary">保存</button>
-                <button id="btn-delete-worldview" class="btn-danger">删除</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="modal-book-selector" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="modal-title">选择世界书</span>
-        </div>
-        <div class="modal-body">
-            <div id="selector-list" class="selector-list">
-                <!-- JS 会在这里生成可供选择的列表 -->
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button id="btn-selector-cancel" class="btn-secondary">取消</button>
-            <button id="btn-selector-confirm" class="btn-primary">确定</button>
-        </div>
-    </div>
-</div>
-
-</div> <!-- 👈 这个是 container 的闭合标签 -->
-
-<script type="module" src="js/script.js"></script>
+<script type="module" src="./js/main.js"></script>
 </body>
 </html>
